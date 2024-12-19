@@ -61,6 +61,14 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <strong>Stock:</strong>
+                <textarea name="stock_id" class="form-control" placeholder="Saisir le stock"></textarea>
+            </div>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-12 text-center">

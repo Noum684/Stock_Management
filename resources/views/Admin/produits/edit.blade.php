@@ -6,7 +6,7 @@
         <div class="float-start"> 
             <h2>Modifier</h2>
          </div> 
-         <div class="float-end"> <a class="btn btn-outline-primary" href="{{ route('produit.index') }}"> Retour</a> 
+         <div class="float-end"> <a class="btn btn-outline-primary" href="{{ route('Admin.produit.index') }}"> Retour</a> 
         </div>
     </div>
 </div>
@@ -17,11 +17,14 @@
             @foreach ($errors->all() as $error) <li>{{ $error }}</li>
              @endforeach </ul> 
 </div> 
-@endif <form action="{{ route('produit.update',$produit->produit_id) }}" method="post"> 
-@csrf @method('PUT') 
+@endif 
+<form action="{{ route('Admin.produit.update',$produit->produit_id) }}" method="post"> 
+@csrf
+@method('PUT') 
 <div class="row g-3"> 
     <div class="col-md-6"> 
-        <div class="form-group"> <strong>Nom:</strong> 
+        <div class="form-group"> 
+            <strong>Nom:</strong> 
              <input type="text" name="nom" value="{{ $produit->nom }}" class="form-control" placeholder="Saisir le nom du produit"> 
          </div> 
     </div> 
@@ -31,9 +34,38 @@
         <div class="form-group">
             <strong>Catégorie:</strong>
             <select name="categorie_id" class="form-control">
-                @foreach($categories as $categorie)
-                    <option value="{{ $categorie->categorie_id }}" {{ $produit->categorie_id == $categorie->categorie_id ? 'selected' : '' }}>
+                @foreach($categorie as $cat)
+                    <option value="{{ $cat->categorie_id }}" {{ $produit->categorie_id == $cat->categorie_id ? 'selected' : '' }}>
                         {{ $categorie->nom }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+</div>
+<div class="row g-3"> 
+    <div class="col-md-6"> 
+        <div class="form-group"> 
+            <strong>Prix:</strong> 
+            <input type="text" name="prix" value="{{ $produit->prix}}" class="form-control" placeholder="Saisir le prix du produit"> 
+        </div> 
+    </div> 
+</div>
+<div class="row g-3"> 
+    <div class="col-md-6"> 
+        <div class="form-group"> 
+            <strong>Description:</strong> <input type="text" name="description" value="{{ $produit->description}}" class="form-control" placeholder="Saisir la description"> 
+        </div> 
+    </div> 
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="form-group">
+            <strong>Stock:</strong>
+            <select name="categorie_id" class="form-control">
+                @foreach($stok as $stocks)
+                    <option value="{{ $stocks->stock_id }}" {{ $produit->stock_id == $stocks->stock_id ? 'selected' : '' }}>
+                        {{ $stocks->quantite }}
                     </option>
                 @endforeach
             </select>

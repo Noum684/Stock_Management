@@ -24,6 +24,7 @@
         <th>Catégorie</th>
         <th>Prix Unitaire</th>
         <th>Description</th>
+        <th>Stock</th>
         <th width="280px">Action</th>
     </tr>
     @foreach ($produit as $prod)
@@ -33,11 +34,12 @@
         <td>{{ $prod->categorie->nom }}</td>
         <td>{{ $prod->prix }}</td>
         <td>{{ $prod->description }}</td>
+        <td>{{ $prod->stock->quantite }}</td>
         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
             <x-action-buttons 
-                :show="route('produits.show', $prod->produit_id)" 
-                :edit="route('produits.edit', $prod->produit_id)" 
-                :delete="route('produits.destroy', $prod->produit_id)" />
+                :show="route('Admin.produits.show', $prod->produit_id)" 
+                :edit="route('Admin.produits.edit', $prod->produit_id)" 
+                :delete="route('Admin.produits.destroy', $prod->produit_id)" />
         </td>
     </tr>
     @endforeach

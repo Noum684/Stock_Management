@@ -31,7 +31,7 @@ class ProduitController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([ 'nom' => 'required', 'description' => 'required', 'prix' => 'required', 'categorie_id' => 'required',]);
+        $request->validate(['nom' => 'required',  'categorie_id' => 'required','prix' => 'required','description' => 'required','stock_id'=>'required',]);
         Produit::create($request->all()); return redirect()->route('produit.index') ->with('success','Produit créé avec succès.');
     }
 
@@ -58,7 +58,7 @@ class ProduitController extends Controller
      */
     public function update(Request $request, Produit $produit)
     {
-        $request->validate([ 'nom' => 'required', 'description' => 'required', 'prix' => 'required','categorie_id' => 'required',]); 
+        $request->validate([ 'nom' => 'required',  'categorie_id' => 'required','prix' => 'required','description' => 'required','stock_id'=>'required',]); 
         $produit->update($request->all()); 
         return redirect()->route('produit.index') ->with('success','Produit mis à jour avec succès.');
     }

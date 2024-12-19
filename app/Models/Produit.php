@@ -9,7 +9,7 @@ class Produit extends Model
 {
     use HasFactory; protected $table="produit"; public $primaryKey = 'id';
      public $incrementing = true; 
-     protected $fillable = [ 'id','nom','prix','description','categorie_id'];
+     protected $fillable = [ 'id','nom','categorie_id','prix','description','stock_id'];
 
      public function stock()
     {
