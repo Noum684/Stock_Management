@@ -41,8 +41,8 @@ class StatistiqueController extends Controller
         ->take(5)
         ->get();
 
-    $stock = Produit::select('nom', 'stock-id')
-        ->orderBy('stock', 'desc')
+    $stock = Produit::select('nom', 'stock_id')
+        ->orderBy('stock_id', 'desc')
         ->get();
 
     // Retourner la vue welcome avec les données
