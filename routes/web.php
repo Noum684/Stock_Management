@@ -80,7 +80,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::post('/users/{id}/roles', [RoleController::class, 'assignRole'])->name('roles.assign');
 Route::post('/users/{id}/permissions', [RoleController::class, 'assignPermission'])->name('permissions.assign');
 // Statistiques
+Route::get('/', [StatistiqueController::class, 'showOnWelcome'])->name('welcome');
 Route::get('/statistiques', [StatistiqueController::class, 'index'])->name('statistiques.index');
+
 
 });
 

@@ -30,4 +30,23 @@ class StatistiqueController extends Controller
 
         return view('statistiques.index', compact('totalProduits', 'totalCommandes', 'produitsPopulaires', 'stocks'));
     }
+    public function showOnWelcome()
+{
+    // Données pour les statistiques
+    $totalProduits = Produit::count();
+    $totalCommandes = Commande::count();
+    $produitsPopulaires = Commande::selectRaw('produit_id, SUM(quantite) as total_vendu')
+        ->groupBy('produit_id')
+        ->orderByDesc('total_vendu')
+        ->take(5)
+        ->get();
+
+    $stocks = Produit::select('nom', 'stock')
+        ->orderBy('stock', 'desc')
+        ->get();
+
+    // Retourner la vue welcome avec les données
+    return view('welcome', compact('totalProduits', 'totalCommandes', 'produitsPopulaires', 'stocks'));
+}
+
 }
