@@ -11,42 +11,42 @@ class StatistiqueController extends Controller
     public function index()
     {
         // Nombre total de produits
-        $totalProduits = Produit::count();
+        $totalProduit = Produit::count();
 
         // Nombre total de commandes
-        $totalCommandes = Commande::count();
+        $totalCommande = Commande::count();
 
         // Produits les plus vendus
-        $produitsPopulaires = Commande::selectRaw('produit_id, SUM(quantite) as total_vendu')
+        $produitsPopulaire = Commande::selectRaw('produit_id, SUM(quantite) as total_vendu')
             ->groupBy('produit_id')
             ->orderByDesc('total_vendu')
             ->take(5)
             ->get();
 
         // Stocks par point de vente
-        $stocks = Produit::select('nom', 'stock')
+        $stock = Produit::select('nom', 'stock_id')
             ->orderBy('stock', 'desc')
             ->get();
 
-        return view('statistiques.index', compact('totalProduits', 'totalCommandes', 'produitsPopulaires', 'stocks'));
+        return view('statistiques.index', compact('totalProduit', 'totalCommande', 'produitsPopulaire', 'stock'));
     }
     public function showOnWelcome()
 {
     // Données pour les statistiques
-    $totalProduits = Produit::count();
-    $totalCommandes = Commande::count();
-    $produitsPopulaires = Commande::selectRaw('produit_id, SUM(quantite) as total_vendu')
+    $totalProduit = Produit::count();
+    $totalCommande = Commande::count();
+    $produitsPopulaire = Commande::selectRaw('produit_id, SUM(quantite) as total_vendu')
         ->groupBy('produit_id')
         ->orderByDesc('total_vendu')
         ->take(5)
         ->get();
 
-    $stocks = Produit::select('nom', 'stock')
+    $stock = Produit::select('nom', 'stock-id')
         ->orderBy('stock', 'desc')
         ->get();
 
     // Retourner la vue welcome avec les données
-    return view('welcome', compact('totalProduits', 'totalCommandes', 'produitsPopulaires', 'stocks'));
+    return view('welcome', compact('totalProduit', 'totalCommande', 'produitsPopulaire', 'stock'));
 }
 
 }

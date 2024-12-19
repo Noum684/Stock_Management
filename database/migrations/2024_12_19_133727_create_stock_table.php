@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('produit', function (Blueprint $table) {
-            $table->unsignedBigInteger('stock_id')->default(0);
-            $table->foreign('stock_id')->references('id')->on('stock')->onDelete('cascade');
+        Schema::create('stock', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+            $table->integer('quantite');
+            $table->unsignedBigInteger('point_vente_id');
+            $table->foreign('point_vente_id')->references('id')->on('point_vente')->onDelete('cascade');
         });
     }
 
@@ -22,8 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('produit', function (Blueprint $table) {
-            $table->dropColumn('stock_id');
-        });
+        Schema::dropIfExists('stock');
     }
 };

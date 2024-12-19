@@ -11,7 +11,7 @@ class Stock extends Model
     protected $table="stock"; 
     public $primaryKey = 'id'; 
     public $incrementing = true; 
-    protected $fillable = [ 'id', 'quantite','produit_id','point_vente_id'];
+    protected $fillable = [ 'id', 'quantite','point_vente_id'];
     public function produits()
     {
         return $this->hasMany(Produit::class);

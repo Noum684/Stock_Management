@@ -33,7 +33,7 @@ class StockController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(['quantite' => 'required','produit_id'=>'required|exists:produit,id','point_vente_id'=>'required|exists:point_vente,id',]);
+        $request->validate(['quantite' => 'required','point_vente_id'=>'required|exists:point_vente,id',]);
         Stock::create($request->all());
         return redirect()->route('stock.index') ->with('success','Stock créé avec succès.');
     }
@@ -60,7 +60,7 @@ class StockController extends Controller
     public function update(Request $request, Stock $stock)
     {
         
-        $request->validate([ 'quantite' => 'required','produit_id'=>'required','point_vente_id'=>'required', ]); 
+        $request->validate([ 'quantite' => 'required','point_vente_id'=>'required', ]); 
         $stock->update($request->all()); 
         return redirect()->route('stock.index') ->with('success','Stock mis à jour avec succès.');
     }
