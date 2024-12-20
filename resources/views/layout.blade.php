@@ -38,14 +38,14 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
-        footer {
+        /* footer {
             text-align: center;
             padding: 10px;
             background-color: #007bff;
-            color: white;
-            margin-top: 50px;
+            color: black;
+            /* margin-top: 50px; 
             font-size: 14px;
-        }
+        } */
 
         .sidebar {
             height: 100vh;
@@ -356,15 +356,8 @@
 
     </nav>
     <div class="container-fluid">  
-        @yield('content')          
-</div> 
-</div>
-
-</div>
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
-</di>
+            @yield('content')          
+    </div> 
 </div>
 
  <footer class="sticky-footer bg-white">
@@ -374,6 +367,11 @@
         </div>
     </div>
 </footer>
+</div>
+</div>
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
 <!-- End of Footer -->
 
 <!-- Bootstrap core JavaScript-->

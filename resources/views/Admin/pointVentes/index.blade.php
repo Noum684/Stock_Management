@@ -1,7 +1,6 @@
 @extends('layout') 
 @section('content') 
 
-<div id="content-wrapper" class="d-flex flex-column">
     <div class="row mb-3">
         <div class="col-lg-12 margin-tb">
          <div class="float-start"> 

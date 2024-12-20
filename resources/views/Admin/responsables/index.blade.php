@@ -1,7 +1,6 @@
 @extends('layout')
 @section('content')
 
-<div id="content-wrapper" class="d-flex flex-column">
     <div class="row mb-3">
         <div class="col-lg-12 margin-tb">
         <div class="float-start">
@@ -44,16 +43,7 @@
     </tr>
     @endforeach
 </table>
-
-<div class="d-flex justify-content-center pagination-lg">
-    {!! $responsable->links('pagination::bootstrap-4') !!}
-</div>
-@endsection
-</table> 
 <div class="d-flex justify-content-center pagination-lg"> 
     {!! $responsable->links('pagination::bootstrap-4') !!} 
-</div>
-
-
 </div>
 @endsection
