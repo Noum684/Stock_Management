@@ -32,8 +32,8 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('welcome')}}">
-                <div class="sidebar-brand-icon rotate-n-15"> 
-                    <i class="fas fa-laugh-wink"></i>
+                <div class="w-32 h-auto mx-auto"> 
+                    <img src="{{asset('assets/img/DoucSoft_W.png')}}" alt="" width="120px">
                 </div>
                 <div class="sidebar-brand-text mx-3">Stock  <sup>Management</sup></div> 
             </a>

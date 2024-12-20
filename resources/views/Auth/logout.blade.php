@@ -1,16 +1,10 @@
-@extends('layout')
+<x-guest-layout>
 
-@section('content')
-<div class="container text-center">
-    <h2>Déconnexion</h2>
-    <p>Voulez-vous vraiment vous déconnecter ?</p>
-
-    <!-- Formulaire de déconnexion -->
     <form method="POST" action="{{ route('logout') }}">
         @csrf
-        <button type="submit" class="btn btn-danger">Se déconnecter</button>
+            <button type="submit" class="text-white bg-red-500 hover:bg-red-700 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                {{ __('Log out') }}
+            </button>
     </form>
 
-    <a href="{{ route('dashboard') }}" class="btn btn-secondary mt-3">Annuler</a>
-</div>
-@endsection
+</x-guest-layout>
