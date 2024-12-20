@@ -24,7 +24,7 @@
     </div>
 @endif
 
-<form action="{{ route('Admin.categprie.store') }}" method="POST">
+<form action="{{ route('Admin.categorie.store') }}" method="POST">
     @csrf
     <div class="row g-3">
         <div class="col-md-6">

@@ -42,6 +42,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/Admin/produit/create', [ProduitController::class, 'create'])->name('Admin.produit.create');
     Route::get('/Admin/produit', [ProduitController::class, 'index'])->name('Admin.produit.index');
     Route::get('/Admin/produit/{id}/edit', [ProduitController::class, 'edit'])->name('Admin.produit.edit');
+    Route::get('/Admin/produit/store',[ProduitController::class,'store'])->name('Admin.produit.store');
 
     // Gestion du Stock
     Route::get('/Admin/stock', [StockController::class, 'index'])->name('Admin.stock.index');

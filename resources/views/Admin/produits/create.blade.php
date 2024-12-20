@@ -37,9 +37,9 @@
         <div class="col-12">
             <div class="form-group">
                 <strong>Catégorie:</strong>
-                <select name="responsable_id" class="form-control">
-                    @foreach($categories as $categorie)
-                        <option value="{{ $categorie->categorie_id }}">{{ $categorie->nom }}</option>
+                <select name="categorie_id" class="form-control">
+                    @foreach($categorie as $cat)
+                        <option value="{{ $cat->categorie_id }}">{{ $categorie->nom }}</option>
                     @endforeach
                 </select>
             </div>
