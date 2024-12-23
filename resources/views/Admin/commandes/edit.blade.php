@@ -20,8 +20,13 @@
 @csrf @method('PUT') 
 <div class="row g-3"> 
     <div class="col-md-6"> 
-        <div class="form-group"> <strong>Nom du produit:</strong> 
-             <input type="text" name="produit_id" value="{{ $commande->produit_id }}" class="form-control" placeholder="Saisir le produit"> 
+        <div class="form-group"> 
+            <strong>Nom du produit:</strong>
+                    <select name="produit_id" class="form-control">
+                        @foreach($produits as $produit)
+                            <option value="{{ $produit->produit_id }}">{{ $produit->nom }} </option>
+                        @endforeach
+                    </select>
          </div> 
     </div> 
 </div> 
@@ -35,7 +40,12 @@
 <div class="row g-3"> 
     <div class="col-md-6"> 
         <div class="form-group"> 
-            <strong>Status:</strong> <input type="text" name="status" value="{{ $commande->status}}" class="form-control" placeholder="Saisir le status"> 
+            <strong>Status:</strong>
+                <select name="status" class="form-control">
+                    <option value="En attente">En attente</option>
+                    <option value="Refusée">Refusée</option>
+                    <option value="Livrée">Livrée</option>
+                </select>
         </div> 
     </div> 
 </div>

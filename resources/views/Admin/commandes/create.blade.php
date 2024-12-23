@@ -5,10 +5,10 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="float-start">
-            <h2>Ajouter une commande/h2>
+            <h2>Ajouter une commande</h2>
         </div>
         <div class="float-end">
-            <a class="btn btn-outline-primary" href="{{ route('commande.index') }}">Retour</a>
+            <a class="btn btn-outline-primary" href="{{ route('Admin.commande.index') }}">Retour</a>
         </div>
     </div>
 </div>
@@ -24,7 +24,7 @@
     </div>
 @endif
 
-<form action="{{ route('commande.store') }}" method="POST">
+<form action="{{ route('Admin.commande.store') }}" method="POST">
     @csrf
     <div class="row g-3">
         <div class="col-md-6">
@@ -55,9 +55,9 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-12 text-center">
-            <button type="submit" class="btn btn-primary"><a href="">Enregistrer</a></button>
-        </div>
+            <div class="col-12 text-center ">
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+            </div>
     </div>
 </form>
 @endsection

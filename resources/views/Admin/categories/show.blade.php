@@ -12,18 +12,18 @@
     </div> 
 </div> 
 <div class="row"> 
-    <div class="col-xs-12 col-sm-12 col-md-12"> 
+    <div class="col-md-6"> 
         <div class="form-group"> 
             <strong>Numéro: </strong> {{ $categoriee->id }} 
         </div> 
     </div> 
-    <div class="col-xs-12 col-sm-12 col-md-12"> 
+    <div class="col-md-6"> 
         <div class="form-group"> <strong>Nom: </strong> {{ $categorie->nom}} 
         </div> 
     </div> 
-    <div class="col-xs-12 col-sm-12 col-md-12"> 
+    <div class="col-md-6"> 
         <div class="form-group"> 
-            <strong>Status: </strong> {{ $categorie->status}} 
+            <strong>Description: </strong> {{ $categorie->description}} 
         </div>
     </div> 
 </div> 

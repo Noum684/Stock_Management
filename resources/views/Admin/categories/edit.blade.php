@@ -18,7 +18,7 @@
              @endforeach </ul> 
 </div> 
 @endif 
-<form action="{{ route('categorie.update',$categorie->categorie_id) }}" method="post"> 
+<form action="{{ route('Admin.categorie.update',$categorie->categorie_id) }}" method="post"> 
 @csrf 
 @method('PUT') 
 <div class="row g-3"> 

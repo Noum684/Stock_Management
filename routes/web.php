@@ -55,13 +55,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/Admin/commande/create', [CommandeController::class, 'create'])->name('Admin.commande.create');
     Route::get('/Admin/commande/update', [CommandeController::class, 'create'])->name('Admin.commande.update');
     Route::get('/Admin/commande/{id}/edit', [CommandeController::class, 'edit'])->name('Admin.commande.edit');
+    Route::get('/Admin/commande/store',[CommandeController::class,'store'])->name('Admin.commande.store');
 
 
     // Gestion des Catégories
     Route::get('/Admin/categorie', [CategorieController::class]);
     Route::get('/Admin/categorie', [CategorieController::class], 'index')->name('Admin.categorie.index');
     Route::get('/Admin/categorie/create', [CategorieController::class], 'create')->name('Admin.categorie.create');
-
+ 
 
     // Gestion du profil
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

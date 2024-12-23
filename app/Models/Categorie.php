@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Categorie extends Model
 {
-    use HasFactory; protected $table="categorie"; public $primaryKey = 'id'; 
-    public $incrementing = true; protected $fillable = [ 'id', 'nom','description'];
+    use HasFactory; 
+    protected $table="categorie"; 
+    public $primaryKey = 'id'; 
+    public $incrementing = true; 
+    protected $fillable = [ 'id', 'nom','description'];
 }
