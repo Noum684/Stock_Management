@@ -30,8 +30,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('welcome');
 
     // Gestion des responsables
-    Route::get('/Admin/responsable', [ResponsableController::class], 'index')->name('Admin.responsable.index');
-    Route::get('/Admin/responsable/create', [ResponsableController::class], 'create')->name('Admin.responsable.create');
+    Route::get('/Admin/responsable', [ResponsableController::class,'index'])->name('Admin.responsable.index');
+    Route::get('/Admin/responsable/create', [ResponsableController::class,'create'])->name('Admin.responsable.create');
+    Route::get('/Admin/responsable/edit', [ResponsableController::class,'edit'])->name('Admin.responsable.edit');
+    Route::get('/Admin/responsable/update', [ResponsableController::class,'update'])->name('Admin.responsable.update');
+    Route::get('/Admin/responsable/store', [ResponsableController::class,'store'])->name('Admin.responsable.store');
 
 
     // Gestion des points de vente
@@ -47,7 +50,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Gestion du Stock
     Route::get('/Admin/stock', [StockController::class, 'index'])->name('Admin.stock.index');
     Route::get('/Admin/stock/create', [StockController::class, 'create'])->name('Admin.stock.create');
-    Route::get('/Admin/stock/store', [StockController::class, 'store'])->name('Admin.stock.store');
+    Route::post('/Admin/stock/store', [StockController::class, 'store'])->name('Admin.stock.store');
     Route::get('/Admin/stock/{id}/edit', [StockController::class, 'edit'])->name('Admin.stock.edit');
 
     // Gestion des commandes
@@ -55,13 +58,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/Admin/commande/create', [CommandeController::class, 'create'])->name('Admin.commande.create');
     Route::get('/Admin/commande/update', [CommandeController::class, 'create'])->name('Admin.commande.update');
     Route::get('/Admin/commande/{id}/edit', [CommandeController::class, 'edit'])->name('Admin.commande.edit');
-    Route::get('/Admin/commande/store',[CommandeController::class,'store'])->name('Admin.commande.store');
+    Route::post('/Admin/commande/store',[CommandeController::class,'store'])->name('Admin.commande.store');
+    Route::get('/Admin/commande/update',[CommandeController::class,'update'])->name('Admin.commande.update');
 
 
     // Gestion des Catégories
     Route::get('/Admin/categorie', [CategorieController::class]);
-    Route::get('/Admin/categorie', [CategorieController::class], 'index')->name('Admin.categorie.index');
-    Route::get('/Admin/categorie/create', [CategorieController::class], 'create')->name('Admin.categorie.create');
+    Route::get('/Admin/categorie', [CategorieController::class, 'index'])->name('Admin.categorie.index');
+    Route::get('/Admin/categorie/create', [CategorieController::class, 'create'])->name('Admin.categorie.create');
+    Route::post('/Admin/categorie/store',[CategorieController::class, 'store'])->name('Admin.categorie.store');
+    Route::get('/Admin/categoire/edit',[CategorieController::class, 'edit'])->name('Admin.categorie.edit');
+    Route::get('/Admin/categoire/update',[CategorieController::class, 'update'])->name('Admin.categorie.update');
  
 
     // Gestion du profil

@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('point_vente', function (Blueprint $table) {
-            $table->unsignedBigInteger('id')->primary();
+            $table->id();
             $table->string('nom');
-            $table->string('adresse');
+            $table->string('adresse')->nullable(); 
             $table->unsignedBigInteger('responsable_id');
             $table->timestamps();
 

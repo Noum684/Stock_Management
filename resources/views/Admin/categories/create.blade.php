@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="row">
+<div class="row mb-3">
     <div class="col-lg-12 margin-tb">
         <div class="float-start">
             <h2>Ajouter une catégorie</h2>
@@ -26,7 +26,7 @@
 
 <form action="{{ route('Admin.categorie.store') }}" method="POST">
     @csrf
-    <div class="row g-3">
+    <div class="row mb-3">
         <div class="col-md-6">
             <div class="form-group">
                 <strong>Nom:</strong>

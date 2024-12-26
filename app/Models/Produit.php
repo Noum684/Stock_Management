@@ -13,18 +13,8 @@ class Produit extends Model
 
      public function stock()
     {
-        return $this->belongsTo(Stock::class);
+        return $this->hasOne(Stock::class);
     }
 
-    // Relation avec la catégorie
-    public function categorie()
-    {
-        return $this->belongsTo(Categorie::class);
-    }
-
-    // Relation avec les commandes (many-to-many)
-    public function commandes()
-    {
-        return $this->belongsToMany(Commande::class)->withPivot('quantite');
-    }
+    
 }

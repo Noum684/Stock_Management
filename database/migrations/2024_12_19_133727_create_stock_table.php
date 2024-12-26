@@ -13,10 +13,13 @@ return new class extends Migration
     {
         Schema::create('stock', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->integer('quantite');
+            $table->integer('quantite')->default(10);
+            $table->unsignedBigInteger('produit_id');
+            $table->foreign('produit_id')->references('id')->on('produit')->onDelete('cascade');
             $table->unsignedBigInteger('point_vente_id');
             $table->foreign('point_vente_id')->references('id')->on('point_vente')->onDelete('cascade');
+            $table->integer('seuil_m')->default(10);
+            $table->timestamps();
         });
     }
 
