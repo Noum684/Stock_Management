@@ -7,7 +7,7 @@
             <h2>Liste des Catégories</h2>
         </div>
         <div class="float-end">
-            <a class="btn btn-outline-success" href="{{ route('Admin.categories.create') }}">+ Nouvelle Catégorie</a>
+            <a class="btn btn-outline-success" href="{{ route('Admin.categorie.create') }}">+ Nouvelle Catégorie</a>
         </div>
     </div>
 </div>
@@ -32,9 +32,9 @@
         <td>{{ $cat->description }}</td>
         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
             <x-action-buttons 
-                :show="route('Admin.categories.show', $cat->categorie_id)" 
-                :edit="route('Admin.categories.edit', $cat->categorie_id)" 
-                :delete="route('Admin.categories.destroy', $cat->categorie_id)" />
+                :show="route('Admin.categorie.show', $cat->categorie_id)" 
+                :edit="route('Admin.categorie.edit', $cat->categorie_id)" 
+                :delete="route('Admin.categorie.destroy', $cat->categorie_id)" />
         </td>
     </tr>
     @endforeach

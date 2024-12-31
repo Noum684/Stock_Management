@@ -12,4 +12,10 @@ class PointVente extends Model
     public $primaryKey = 'id';
     public $incrementing = true;
     protected $fillable = ['id', 'nom', 'adresse', 'responsable_id'];
+
+    public function produits()
+    {
+        return $this->hasMany(Produit::class);
+    }
+
 }

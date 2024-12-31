@@ -265,12 +265,10 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Stocks
+                                            <div class="col-md-4">
+                                                <h3>Quantité Totale en Stock</h3>
+                                                <p>{{ $totalQuantiteStock }}</p>
                                             </div>
-                                            <div class="row no-gutters align-items-center">
-                                                <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
-                                                </div>
                                                 <div class="col">
                                                     <div class="progress progress-sm mr-2">
                                                         <div class="progress-bar bg-info" role="progressbar"
@@ -293,12 +291,11 @@
                             <div class="card border-left-warning shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Responsables</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                                        <div class="col-md-4">
+                                            <h3>Stocks Critiques</h3>
+                                            <p>{{ $stocksCritiques }}</p>
                                         </div>
-                                        <div class="col-auto">
+                                        <div class="col-auto"> 
                                             <i class="fas fa-comments fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
@@ -367,7 +364,7 @@
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     <div class="chart-pie pt-4 pb-2">
-                                        <canvas id="myPieChart"></canvas>
+                                        <canvas id="stocksChart" width="400" height="200"></canvas>
                                     </div>
                                     <div class="mt-4 text-center small">
                                         <span class="mr-2">

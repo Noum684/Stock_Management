@@ -15,6 +15,24 @@
 <!-- End of Footer -->
 
 <!-- Bootstrap core JavaScript-->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('stocksChart').getContext('2d');
+    const chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Stock Critique', 'Quantité Totale'], // Noms des catégories
+            datasets: [{
+                label: 'Statistiques des Stocks',
+                data: [{{ $stocksCritiques }}, {{ $totalQuantiteStock }}], // Données des stocks
+                backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)'],
+                borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)'],
+                borderWidth: 1
+            }]
+        }
+    });
+</script>
+
 <script src="/assets/vendor/jquery/jquery.min.js"></script>
 <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 

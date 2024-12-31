@@ -13,6 +13,7 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StatistiqueController;
+use App\Http\Controllers\HomeController;
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
@@ -28,6 +29,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/', function () {
         return view('welcome');
     })->name('welcome');
+    Route::get('/', [HomeController::class, 'index']);
 
     // Gestion des responsables
     Route::get('/Admin/responsable', [ResponsableController::class,'index'])->name('Admin.responsable.index');
@@ -69,6 +71,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/Admin/categorie/store',[CategorieController::class, 'store'])->name('Admin.categorie.store');
     Route::get('/Admin/categoire/edit',[CategorieController::class, 'edit'])->name('Admin.categorie.edit');
     Route::get('/Admin/categoire/update',[CategorieController::class, 'update'])->name('Admin.categorie.update');
+    Route::get('/Admin/categoire/show',[CategorieController::class, 'show'])->name('Admin.categorie.show');
+    Route::get('/Admin/categoire/destroy',[CategorieController::class, 'destroy'])->name('Admin.categorie.destroy');
  
 
     // Gestion du profil
@@ -86,11 +90,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/Admin/settings', [SettingController::class, 'update'])->name('Admin.settings.update');
     // Rôles et permissions
     Route::get('/users/{id}/roles', [RoleController::class, 'showAssignRoleForm'])->name('roles.showForm');
-Route::post('/users/{id}/roles', [RoleController::class, 'assignRole'])->name('roles.assign');
-Route::post('/users/{id}/permissions', [RoleController::class, 'assignPermission'])->name('permissions.assign');
-// Statistiques
-Route::get('/', [StatistiqueController::class, 'showOnWelcome'])->name('welcome');
-Route::get('/statistiques', [StatistiqueController::class, 'index'])->name('statistiques.index');
+    Route::post('/users/{id}/roles', [RoleController::class, 'assignRole'])->name('roles.assign');
+    Route::post('/users/{id}/permissions', [RoleController::class, 'assignPermission'])->name('permissions.assign');
+    // Statistiques
+    Route::get('/statistiques', [StatistiqueController::class, 'index'])->name('statistiques.index');
+    Route::get('/statistiques/export', [StatistiqueController::class, 'export'])->name('statistiques.export');
 
 
 });

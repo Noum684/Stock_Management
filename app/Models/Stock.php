@@ -12,10 +12,11 @@ class Stock extends Model
     public $primaryKey = 'id'; 
     public $incrementing = true; 
     protected $fillable = [ 'id', 'quantite','produit_id','point_vente_id','seuil_m'];
-    public function produits()
+    public function produit()
     {
-        return $this->hasMany(Produit::class);
+        return $this->belongsTo(Produit::class);
     }
+
     
     /**
      * Get the responsable that owns the Stock
