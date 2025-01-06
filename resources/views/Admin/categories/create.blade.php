@@ -27,13 +27,13 @@
 <form action="{{ route('Admin.categorie.store') }}" method="POST">
     @csrf
     <div class="row mb-3">
-        <div class="col-md-6">
+        <div class="col-12 mb-3">
             <div class="form-group">
                 <strong>Nom:</strong>
                 <input type="text" name="nom" class="form-control" placeholder="Saisir le nom de la catégorie">
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-12 mb-3">
             <div class="form-group">
                 <strong>Description:</strong>
                 <input type="text" name="description" class="form-control" placeholder="Saisir la description">

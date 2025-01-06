@@ -28,15 +28,15 @@
     </tr>
     @foreach ($stock as $stocks)
     <tr>
-        <td>{{ $stocks->stock_id }}</td>
+        <td>{{ $stocks->id }}</td>
         <td>{{ $stocks->produit->nom }}</td>
         <td>{{ $stocks->quantite }}</td>
         <td>{{ $stocks->point_Vente->adresse }}</td>
         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
             <x-action-buttons 
-                :show="route('Admin.stocks.show', $stocks->stock_id)" 
-                :edit="route('Admin.stocks.edit', $stocks->stock_id)" 
-                :delete="route('Admin.stocks.destroy', $stocks->stock_id)" />
+                :show="route('Admin.stocks.show', $stocks->id)" 
+                :edit="route('Admin.stocks.edit', $stocks->id)" 
+                :delete="route('Admin.stocks.destroy', $stocks->id)" />
         </td>
     </tr>
     @endforeach

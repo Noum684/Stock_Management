@@ -18,8 +18,8 @@
 </div> 
 @endif <form action="{{ route('Admin.commande.update',$commande->commande_id) }}" method="post"> 
 @csrf @method('PUT') 
-<div class="row g-3"> 
-    <div class="col-md-6"> 
+<div class="row mb-3"> 
+    <div class="col-12 mb-3"> 
         <div class="form-group"> 
             <strong>Nom du produit:</strong>
                     <select name="produit_id" class="form-control">
@@ -28,17 +28,13 @@
                         @endforeach
                     </select>
          </div> 
-    </div> 
-</div> 
-<div class="row g-3"> 
-    <div class="col-md-6"> 
+    </div>  
+    <div class="col-12 mb-3"> 
         <div class="form-group"> 
             <strong>Quantité commandée:</strong> <input type="text" name="quantite" value="{{ $commande->quantite}}" class="form-control" placeholder="Saisir la quantité"> 
         </div> 
     </div> 
-</div>
-<div class="row g-3"> 
-    <div class="col-md-6"> 
+    <div class="col-12 mb-3"> 
         <div class="form-group"> 
             <strong>Status:</strong>
                 <select name="status" class="form-control">
@@ -49,8 +45,8 @@
         </div> 
     </div> 
 </div>
-<div class="row g-3"> 
-    <div class="col-12 text-center "> 
+<div class="row "> 
+    <div class="col-12  "> 
         <button type="submit" class="btn btn-primary">Modifier</button> 
     </div> </div> 
 </form> 

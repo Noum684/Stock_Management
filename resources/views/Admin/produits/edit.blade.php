@@ -21,16 +21,14 @@
 <form action="{{ route('Admin.produit.update',$produit->produit_id) }}" method="post"> 
 @csrf
 @method('PUT') 
-<div class="row g-3"> 
-    <div class="col-md-6"> 
+<div class="row mb-3"> 
+    <div class="col-12 mb-3"> 
         <div class="form-group"> 
             <strong>Nom:</strong> 
              <input type="text" name="nom" value="{{ $produit->nom }}" class="form-control" placeholder="Saisir le nom du produit"> 
          </div> 
     </div> 
-</div> 
-<div class="row">
-    <div class="col-12">
+    <div class="col-12 mb-3">
         <div class="form-group">
             <strong>Catégorie:</strong>
             <select name="categorie_id" class="form-control">
@@ -42,24 +40,18 @@
             </select>
         </div>
     </div>
-</div>
-<div class="row g-3"> 
-    <div class="col-md-6"> 
+    <div class="col-12 mb-3"> 
         <div class="form-group"> 
             <strong>Prix:</strong> 
             <input type="text" name="prix" value="{{ $produit->prix}}" class="form-control" placeholder="Saisir le prix du produit"> 
         </div> 
     </div> 
-</div>
-<div class="row g-3"> 
-    <div class="col-md-6"> 
+    <div class="col-12 mb-3"> 
         <div class="form-group"> 
             <strong>Description:</strong> <input type="text" name="description" value="{{ $produit->description}}" class="form-control" placeholder="Saisir la description"> 
         </div> 
     </div> 
-</div>
-<div class="row">
-    <div class="col-12">
+    <div class="col-12 mb-3">
         <div class="form-group">
             <strong>Stock:</strong>
             <select name="categorie_id" class="form-control">
@@ -73,7 +65,7 @@
     </div>
 </div>
 <div class="row"> 
-    <div class="col-12 text-center "> 
+    <div class="col-12  "> 
         <button type="submit" class="btn btn-primary">Modifier</button> 
     </div> </div> 
 </form> 

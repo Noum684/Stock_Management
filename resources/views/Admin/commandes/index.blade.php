@@ -26,15 +26,23 @@
     </tr>
     @foreach ($commande as $com)
     <tr>
-        <td>{{ $com->commande_id }}</td>
-        <td>{{ $com->produit->nom }}</td>
+        <td>{{ $com->id }}</td>
+        <td>{{ $com->produit->nom ?? 'Produit non défini' }}</td>
         <td>{{ $com->quantite }}</td>
-        <td>{{ $com->status }}</td>
+        <td>{{ ucfirst($commande->statut) }}</td>
+                    <td>
+                        @if($commande->statut == 'En attente')
+                            <a href="{{ route('commande.livrer', $commande->id) }}" class="btn btn-success">Livrer</a>
+                            <a href="{{ route('commande.Refuser', $commande->id) }}" class="btn btn-danger">Refuser</a>
+                        @else
+                            <span class="badge bg-info">{{ ucfirst($commande->statut) }}</span>
+                        @endif
+                    </td>
         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
             <x-action-buttons 
-                :show="route('Admin.commandes.show', $com->commande_id)" 
-                :edit="route('Admin.commandes.edit', $com->commande_id)" 
-                :delete="route('Admin.commandes.destroy', $com->commande_id)" />
+                :show="route('Admin.commandes.show', $com->id)" 
+                :edit="route('Admin.commandes.edit', $com->id)" 
+                :delete="route('Admin.commandes.destroy', $com->id)" />
         </td>
     </tr>
     @endforeach

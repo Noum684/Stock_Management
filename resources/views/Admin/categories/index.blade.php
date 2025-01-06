@@ -27,20 +27,20 @@
     </tr>
     @foreach ($categorie as $cat)
     <tr>
-        <td>{{ $cat->categorie_id }}</td>
+        <td>{{ $cat->id }}</td>
         <td>{{ $cat->nom }}</td>
         <td>{{ $cat->description }}</td>
-        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+        <td>
             <x-action-buttons 
-                :show="route('Admin.categorie.show', $cat->categorie_id)" 
-                :edit="route('Admin.categorie.edit', $cat->categorie_id)" 
-                :delete="route('Admin.categorie.destroy', $cat->categorie_id)" />
+                :show="route('Admin.categorie.show', $cat->id)" 
+                :edit="route('Admin.categorie.edit', $cat->id)" 
+                :delete="route('Admin.categorie.destroy', $cat->id)" />
         </td>
     </tr>
     @endforeach
 </table>
 
 <div class="d-flex justify-content-center pagination-lg">
-    {!! $categories->links('pagination::bootstrap-4') !!}
+    {!! $categorie->links('pagination::bootstrap-4') !!}
 </div>
 @endsection

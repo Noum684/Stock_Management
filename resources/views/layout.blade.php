@@ -359,8 +359,8 @@
                 </li>
 
             </ul>
-
-    </nav>
+            
+            </nav>
     <div class="container-fluid">  
             @yield('content')          
     </div> 

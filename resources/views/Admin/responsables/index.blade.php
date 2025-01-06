@@ -29,16 +29,16 @@
     </tr>
     @foreach ($responsable as $respons)
     <tr>
-        <td>{{ $respons->responsable_id }}</td>
+        <td>{{ $respons->id }}</td>
         <td>{{ $respons->preom }}</td>
         <td>{{ $respons->nom }}</td>
         <td>{{ $respons->email}}</td>
         <td>{{ $respons->telephone}}</td>
         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
             <x-action-buttons 
-                :show="route('Admin.responsables.show', $respons->responsable_id)" 
-                :edit="route('Admin.responsables.edit', $respons->responsable_id)" 
-                :delete="route('Admin.responsables.destroy', $respons->responsable_id)" />
+                :show="route('Admin.responsables.show', $respons->id)" 
+                :edit="route('Admin.responsables.edit', $respons->id)" 
+                :delete="route('Admin.responsables.destroy', $respons->id)" />
         </td>
     </tr>
     @endforeach

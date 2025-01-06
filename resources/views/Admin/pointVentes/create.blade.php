@@ -26,23 +26,20 @@
 
 <form action="{{ route('Admin.pointVente.store') }}" method="POST">
     @csrf
-    <div class="row g-3">
-        <div class="col-md-6">
+    <div class="row mb-3">
+        <div class="col-12 mb-3">
             <div class="form-group">
                 <strong>Nom :</strong>
                 <input type="text" name="nom" class="form-control" placeholder="Saisir le nom du point de vente">
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-12 mb-3">
             <div class="form-group">
                 <strong>Adresse:</strong>
                 <input type="text" name="adresse" class="form-control" placeholder="Saisir l'adresse">
             </div>
         </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-6">
+        <div class="col-12 mb-3">
             <div class="form-group">
                 <strong>Responsable:</strong>
                 <select name="responsable_id" class="form-control">
@@ -55,7 +52,7 @@
     </div>
 
     <div class="row">
-        <div class="col-12 text-center">
+        <div class="col-12 ">
             <button type="submit" class="btn btn-primary">Enregistrer</button>
         </div>
     </div>

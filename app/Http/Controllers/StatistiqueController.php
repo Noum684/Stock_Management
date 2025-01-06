@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Produit;
-use App\Models\Commande;
 use App\Models\Stock;
 use App\Models\PointVente;
 

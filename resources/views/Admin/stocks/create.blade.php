@@ -26,9 +26,9 @@
 
 <form action="{{ route('Admin.stock.store') }}" method="POST">
     @csrf
-    <div class="row g-3">
+    <div class="row mb-3">
         
-        <div class="col-md-6">
+        <div class="col-12 mb-3">
             <div class="form-group">
                 <strong>Nom du produit:</strong>
                 @if($produits->isEmpty())
@@ -42,13 +42,13 @@
                 @endif
             </div>
         </div>
-        <div class="col-12">
+        <div class="col-12 mb-3">
             <div class="form-group">
                 <strong>Quantité disponible:</strong>
                 <input type="text" name="quantite" class="form-control" placeholder="Saisir la quantite">
             </div>
         </div>
-        <div class="col-12">
+        <div class="col-12 mb-3">
             <div class="form-group">
                 <strong>Localisation:</strong>
                 <select name="poinVente_id" class="form-select">
@@ -59,7 +59,7 @@
             </div>
         </div>
     </div>
-    <div class="col-12">
+    <div class="col-12 mb-3">
         <div class="form-group">
             <strong>Seuil:</strong>
             <input type="text" name="seuil_m" class="form-control" placeholder="Saisir la quantite">
@@ -67,7 +67,7 @@
     </div>
 
     <div class="row">
-        <div class="col-12 text-center ">
+        <div class="col-12 ">
             <button type="submit" class="btn btn-primary">Enregistrer</button>
         </div>
     </div>

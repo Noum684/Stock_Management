@@ -26,15 +26,14 @@
 
 <form action="{{ route('Admin.produit.store') }}" method="POST">
     @csrf
-    <div class="row g-3">
-        <div class="col-md-6">
+    <div class="row mb-3">
+        <div class="col-12 mb-3">
             <div class="form-group">
                 <strong>Nom :</strong>
                 <input type="text" name="nom" class="form-control" placeholder="Saisir le nom du produit">
             </div>
         </div>
-        <div class="row">
-        <div class="col-12">
+        <div class="col-12 mb-3">
             <div class="form-group">
                 <strong>Catégorie:</strong>
                 <select name="categorie_id" class="form-control">
@@ -44,25 +43,19 @@
                 </select>
             </div>
         </div>
-    </div>
-        <div class="col-12">
+        <div class="col-12 mb-3">
             <div class="form-group">
                 <strong>Prix Unitaire:</strong>
                 <input type="text" name="prix" class="form-control" placeholder="Saisir le prix">
             </div>
         </div>
-    </div>
-
-    <div class="row">
-        <div class="col-12">
+        <div class="col-12 mb-3">
             <div class="form-group">
                 <strong>Description:</strong>
                 <textarea name="description" class="form-control" placeholder="Saisir la description"></textarea>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
+        <div class="col-12 mb-3">
             <div class="form-group">
                 <strong>Stock:</strong>
                 <textarea name="stock_id" class="form-control" placeholder="Saisir le stock"></textarea>
@@ -71,7 +64,7 @@
     </div>
 
     <div class="row">
-        <div class="col-12 text-center">
+        <div class="col-12 ">
             <button type="submit" class="btn btn-primary">Enregistrer</button>
         </div>
     </div>

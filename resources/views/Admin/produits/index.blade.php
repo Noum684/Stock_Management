@@ -8,7 +8,7 @@
             <h2>Liste des prduits</h2> 
         </div> 
         <div class="float-end"> 
-            <a class="btn btn-outline-success" href="{{ route('produit.create') }}"> +Nouvel produit</a> 
+            <a class="btn btn-outline-success" href="{{ route('Admin.produit.create') }}"> +Nouvel produit</a> 
         </div> 
     </div> 
 </div> 
@@ -29,17 +29,17 @@
     </tr>
     @foreach ($produit as $prod)
     <tr>
-        <td>{{ $prod->produit_id }}</td>
-        <td>{{ $prod->nom }}</td>
+        <td>{{ $prod->id }}</td>
+        <td>{{ $prod->produit->nom ?? 'Produit non défini' }}</td>
         <td>{{ $prod->categorie->nom }}</td>
         <td>{{ $prod->prix }}</td>
         <td>{{ $prod->description }}</td>
         <td>{{ $prod->stock->quantite }}</td>
         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
             <x-action-buttons 
-                :show="route('Admin.produits.show', $prod->produit_id)" 
-                :edit="route('Admin.produits.edit', $prod->produit_id)" 
-                :delete="route('Admin.produits.destroy', $prod->produit_id)" />
+                :show="route('Admin.produits.show', $prod->id)" 
+                :edit="route('Admin.produits.edit', $prod->id)" 
+                :delete="route('Admin.produits.destroy', $prod->id)" />
         </td>
     </tr>
     @endforeach

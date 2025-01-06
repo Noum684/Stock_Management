@@ -30,4 +30,9 @@ class Commande extends Model
 
     return $total;
 }
+public function produit()
+{
+    return $this->belongsTo(Produit::class, 'produit_id');
+}
+
 }

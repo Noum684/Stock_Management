@@ -13,7 +13,7 @@ class CommandeController extends Controller
      */
     public function index()
     {
-         $commande = Commande::latest()->paginate(4); return view('Admin.commandes.index',
+         $commande = Commande::with('produit')->paginate(10); return view('Admin.commandes.index',
        compact('commande')) ->with('i', (request()->input('page', 1) - 1) * 4);
         return view('Admin.commandes.show');
     }
@@ -26,6 +26,24 @@ class CommandeController extends Controller
         $produits= Produit::all();
         return view('Admin.commandes.create',compact('produits'));
     }
+    public function livrer($id)
+    {
+        $commande = Commande::findOrFail($id);
+        $commande->statut = 'Livrée';
+        $commande->save();
+
+        return redirect()->route('commande.index')->with('success', 'Commande marquée comme livrée.');
+    }
+
+    public function refuser($id)
+    {
+        $commande = Commande::findOrFail($id);
+        $commande->statut = 'Refusée ';
+        $commande->save();
+
+        return redirect()->route('commande.index')->with('success', 'Commande refusée.');
+    }
+
 
     /**
      * Store a newly created resource in storage.

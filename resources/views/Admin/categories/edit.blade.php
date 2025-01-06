@@ -22,20 +22,20 @@
 @csrf 
 @method('PUT') 
 <div class="row g-3"> 
-    <div class="col-md-6"> 
+    <div class="col-12 mb-3"> 
         <div class="form-group"> <strong>Nom:</strong> 
              <input type="text" name="nom" value="{{ $categorie->nom }}" class="form-control" placeholder="Saisir le nom"> 
          </div> 
     </div> 
 </div> 
 <div class="row g-3"> 
-    <div class="col-md-6"> 
+    <div class="col-12 mb-3"> 
         <div class="form-group"> 
             <strong>Description:</strong> <input type="text" name="description" value="{{ $categorie->description}}" class="form-control" placeholder="Saisir la description"> 
         </div> 
     </div> 
 </div>
-<div class="row g-3"> 
+<div class="col-12 mb-3"> 
     <div class="col-12 text-center "> 
         <button type="submit" class="btn btn-primary">Modifier</button> 
     </div> </div> 

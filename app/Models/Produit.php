@@ -15,6 +15,10 @@ class Produit extends Model
     {
         return $this->hasOne(Stock::class);
     }
+    public function commandes()
+    {
+        return $this->hasOne(Commande::class, 'produit_id');
+    }
 
     
 }

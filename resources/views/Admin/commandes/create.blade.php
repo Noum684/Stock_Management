@@ -26,24 +26,28 @@
 
 <form action="{{ route('Admin.commande.store') }}" method="POST">
     @csrf
-    <div class="row g-3">
-        <div class="col-md-6">
+    <div class="row mb-3">
+        <div class="col-12 mb-3">
             <div class="form-group">
                 <strong>Nom du produit:</strong>
-                    <select name="produit_id" class="form-control">
+                @if($produits->isEmpty())
+                    <p>Aucun produit disponible.</p>
+                @else
+                    <select name="produit_id" class="form-select">
                         @foreach($produits as $produit)
-                            <option value="{{ $produit->produit_id }}">{{ $produit->nom }} </option>
+                            <option value="{{ $produit->id }}">{{ $produit->nom }}</option>
                         @endforeach
                     </select>
+                @endif
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-12 mb-3">
             <div class="form-group">
                 <strong>Quantité commandée:</strong>
                 <input type="number" name="quantite" class="form-control" placeholder="Saisir la quantite de la commande">
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-12 mb-3">
             <div class="form-group">
                 <strong>Status:</strong>
                 <select name="status" class="form-control">
@@ -55,7 +59,7 @@
         </div>
     </div>
     <div class="row">
-            <div class="col-12 text-center ">
+            <div class="col-12  ">
                 <button type="submit" class="btn btn-primary">Enregistrer</button>
             </div>
     </div>

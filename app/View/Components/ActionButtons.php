@@ -11,15 +11,18 @@ class ActionButtons extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public $show;
+    public $edit;
+    public $delete;
+
+    public function __construct($show = '#', $edit = '#', $delete = '#')
     {
-        //
+        $this->show = $show;
+        $this->edit = $edit;
+        $this->delete = $delete;
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     */
-    public function render(): View|Closure|string
+    public function render()
     {
         return view('components.action-buttons');
     }

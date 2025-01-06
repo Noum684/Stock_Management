@@ -26,15 +26,15 @@
     </tr>
     @foreach ($pointVente as $pointVent)
     <tr>
-        <td>{{ $pointVent->commande_id }}</td>
+        <td>{{ $pointVent->id }}</td>
         <td>{{ $pointVent->nom }}</td>
         <td>{{ $pointVent->adresse }}</td>
         <td>{{ $pointVent->responsable->nom }}</td>
         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
             <x-action-buttons 
-                :show="route('Admin.pointVentes.show', $pointVent->point_Vente_id)" 
-                :edit="route('Admin.pointVentes.edit', $pointVent->point_Vente_id)" 
-                :delete="route('Admin.pointVentes.destroy', $pointvent->point_Vente_id)" />
+                :show="route('Admin.pointVentes.show', $pointVent->id)" 
+                :edit="route('Admin.pointVentes.edit', $pointVent->id)" 
+                :delete="route('Admin.pointVentes.destroy', $pointvent->id)" />
         </td>
     </tr>
     @endforeach
