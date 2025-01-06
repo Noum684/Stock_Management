@@ -34,9 +34,9 @@
         <td>{{ $stocks->point_Vente->adresse }}</td>
         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
             <x-action-buttons 
-                :show="route('Admin.stocks.show', $stocks->id)" 
-                :edit="route('Admin.stocks.edit', $stocks->id)" 
-                :delete="route('Admin.stocks.destroy', $stocks->id)" />
+                :show="route('Admin.stock.show', $stocks->id)" 
+                :edit="route('Admin.stock.edit', $stocks->id)" 
+                :delete="route('Admin.stock.destroy', $stocks->id)" />
         </td>
     </tr>
     @endforeach

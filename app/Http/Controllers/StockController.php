@@ -35,7 +35,7 @@ class StockController extends Controller
     {
         $request->validate(['quantite' => 'required','produit_id' => 'required','point_vente_id'=>'required','seuil_m' => 'required',]);
         Stock::create($request->all());
-        return redirect()->route('stock.index') ->with('success','Stock créé avec succès.');
+        return redirect()->route('Admin.stock.index') ->with('success','Stock créé avec succès.');
     }
 
     /**
@@ -63,7 +63,7 @@ class StockController extends Controller
         $request->validate([ 'quantite' => 'required| integer',]); 
         $stock=Stock::findOrFail($id);
         $stock->update(['quantite'=>$request->quantite]); 
-        return redirect()->route('stock.index') ->with('success','Stock mis à jour avec succès.');
+        return redirect()->route('Admin.stock.index') ->with('success','Stock mis à jour avec succès.');
     }
 
     /**
@@ -72,11 +72,11 @@ class StockController extends Controller
     public function destroy(Stock $stock)
     {
         $stock->delete(); 
-        return redirect()->route('stock.index') ->with('success','Stock supprimé avec succès');
+        return redirect()->route('Admin.stock.index') ->with('success','Stock supprimé avec succès');
     }
     public function checkLowStock(){
         $lowStocks= Stock::whereColumn('quantite','<','seuil_m')->get();
-        return view('stocks.low', compact('lowStocks'));
+        return view('Admin.stock.low', compact('lowStocks'));
 
     }
 }

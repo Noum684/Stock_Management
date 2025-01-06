@@ -36,9 +36,9 @@
         <td>{{ $respons->telephone}}</td>
         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
             <x-action-buttons 
-                :show="route('Admin.responsables.show', $respons->id)" 
-                :edit="route('Admin.responsables.edit', $respons->id)" 
-                :delete="route('Admin.responsables.destroy', $respons->id)" />
+                :show="route('Admin.responsable.show', $respons->id)" 
+                :edit="route('Admin.responsable.edit', $respons->id)" 
+                :delete="route('Admin.responsable.destroy', $respons->id)" />
         </td>
     </tr>
     @endforeach

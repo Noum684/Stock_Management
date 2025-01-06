@@ -40,9 +40,9 @@
                     </td>
         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
             <x-action-buttons 
-                :show="route('Admin.commandes.show', $com->id)" 
-                :edit="route('Admin.commandes.edit', $com->id)" 
-                :delete="route('Admin.commandes.destroy', $com->id)" />
+                :show="route('Admin.commande.show', $com->id)" 
+                :edit="route('Admin.commande.edit', $com->id)" 
+                :delete="route('Admin.commande.destroy', $com->id)" />
         </td>
     </tr>
     @endforeach

@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Commande extends Model
 {
-    use HasFactory; protected $table="commande"; public $primaryKey = 'id'; 
+    use HasFactory; 
+    protected $table="commande"; 
+    public $primaryKey = 'id'; 
     public $incrementing = true; 
     protected $fillable = [ 'id','quantite','produit_id', 'status'];
 
@@ -32,7 +34,7 @@ class Commande extends Model
 }
 public function produit()
 {
-    return $this->belongsTo(Produit::class, 'produit_id');
+    return $this->belongsTo(Produit::class);
 }
 
 }

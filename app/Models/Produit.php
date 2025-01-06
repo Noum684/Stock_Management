@@ -9,7 +9,8 @@ class Produit extends Model
 {
     use HasFactory; protected $table="produit"; public $primaryKey = 'id';
      public $incrementing = true; 
-     protected $fillable = [ 'id','nom','categorie_id','prix','description','stock_id'];
+     protected $fillable = [ 'id','nom','categorie_id','description','prix','quantite'];
+
 
      public function stock()
     {
@@ -17,7 +18,7 @@ class Produit extends Model
     }
     public function commandes()
     {
-        return $this->hasOne(Commande::class, 'produit_id');
+        return $this->hasMany(Commande::class);
     }
 
     

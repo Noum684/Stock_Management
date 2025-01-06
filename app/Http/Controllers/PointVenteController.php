@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PointVente;
+use App\Models\Responsable;
 use Illuminate\Http\Request;
 
 class PointVenteController extends Controller
@@ -21,7 +22,9 @@ class PointVenteController extends Controller
      */
     public function create()
     {
-        return view('Admin.pointVentes.create');
+        $responsables = Responsable::all(); 
+        return view('Admin.pointVentes.create', compact('responsables')); 
+        
     }
 
     /**
@@ -31,7 +34,7 @@ class PointVenteController extends Controller
     {
         $request->validate([ 'nom' => 'required', 'adresse' => 'required', 'responsable_id' => 'required', ]);
         PointVente::create($request->all()); 
-        return redirect()->route('pointVente.index') ->with('success','Point de vente créé avec succès.');
+        return redirect()->route('Admin.pointVente.index') ->with('success','Point de vente créé avec succès.');
     }
 
     /**
@@ -57,7 +60,7 @@ class PointVenteController extends Controller
     {
         $request->validate([ 'nom' => 'required', 'adresse' => 'required', 'responsable_id' => 'required', ]); 
         $pointVente->update($request->all()); 
-        return redirect()->route('pointVente.index') ->with('success','Point de vente mis à jour avec succès.');
+        return redirect()->route('Admin.pointVente.index') ->with('success','Point de vente mis à jour avec succès.');
     }
 
     /**

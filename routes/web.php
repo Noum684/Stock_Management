@@ -37,8 +37,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/Admin/responsable/create', [ResponsableController::class,'create'])->name('Admin.responsable.create');
     Route::get('/Admin/responsable/edit', [ResponsableController::class,'edit'])->name('Admin.responsable.edit');
     Route::get('/Admin/responsable/update', [ResponsableController::class,'update'])->name('Admin.responsable.update');
-    Route::get('/Admin/responsable/store', [ResponsableController::class,'store'])->name('Admin.responsable.store');
+    Route::post('/Admin/responsable/store', [ResponsableController::class,'store'])->name('Admin.responsable.store');
     Route::get('/Admin/responsable/destroy', [ResponsableController::class,'destroy'])->name('Admin.responsable.destroy');
+    Route::get('/Admin/responsable/show', [ResponsableController::class,'show'])->name('Admin.responsable.show');
 
 
     // Gestion des points de vente
@@ -48,6 +49,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/Admin/pointVente/update', [PointVenteController::class, 'update'])->name(('Admin.pointVente.update'));
     Route::get('/Admin/pointVente/store', [PointVenteController::class, 'store'])->name(('Admin.pointVente.store'));
     Route::get('/Admin/pointVente/destroy', [PointVenteController::class, 'destroy'])->name(('Admin.pointVente.destroy'));
+    Route::get('/Admin/pointVente/show', [PointVenteController::class, 'show'])->name(('Admin.pointVente.show'));
 
     // Gestion des produits
     Route::get('/Admin/produit/create', [ProduitController::class, 'create'])->name('Admin.produit.create');
@@ -56,7 +58,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/Admin/produit/store',[ProduitController::class,'store'])->name('Admin.produit.store');
     Route::get('/Admin/produit/update',[ProduitController::class,'update'])->name('Admin.produit.update');
     Route::get('/Admin/produit/destroy',[ProduitController::class,'destroy'])->name('Admin.produit.destroy');
-
+    Route::get('/Admin/produit/show',[ProduitController::class,'show'])->name('Admin.produit.show');
 
     // Gestion du Stock
     Route::get('/Admin/stock', [StockController::class, 'index'])->name('Admin.stock.index');
@@ -65,6 +67,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/Admin/stock/{id}/edit', [StockController::class, 'edit'])->name('Admin.stock.edit');
     Route::get('/Admin/stock/update',[StockController::class,'update'])->name('Admin.stock.update');
     Route::get('/Admin/stock/destroy',[StockController::class,'destroy'])->name('Admin.stock.destroy');
+    Route::get('/Admin/stock/show',[StockController::class,'show'])->name('Admin.stock.show');
 
     // Gestion des commandes
     Route::get('/Admin/commande', [CommandeController::class, 'index'])->name('Admin.commande.index');
@@ -72,10 +75,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/Admin/commande/update', [CommandeController::class, 'update'])->name('Admin.commande.update');
     Route::get('/Admin/commande/{id}/edit', [CommandeController::class, 'edit'])->name('Admin.commande.edit');
     Route::post('/Admin/commande/store',[CommandeController::class,'store'])->name('Admin.commande.store');
-    Route::get('/Admin/commande/dstroy',[CommandeController::class,'destroy'])->name('Admin.commande.destroy');
+    Route::get('/Admin/commande/destroy',[CommandeController::class,'destroy'])->name('Admin.commande.destroy');
     Route::get('/commande/{id}/livrer', [CommandeController::class, 'livrer'])->name('commande.livrer');
     Route::get('/commande/{id}/refuser', [CommandeController::class, 'refuser'])->name('commande.refuser');
     Route::resource('commande', CommandeController::class);
+    Route::get('/Admin/commande/show',[CommandeController::class,'show'])->name('Admin.commande.show');
 
 
     // Gestion des Catégories

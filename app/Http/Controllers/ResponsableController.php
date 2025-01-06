@@ -31,7 +31,7 @@ class ResponsableController extends Controller
     {
         $request->validate([ 'prenom' => 'required', 'nom' => 'required', 'email' => 'required','telephone'=>'required', ]);
         Responsable::create($request->all()); 
-        return redirect()->route('responsable.index') ->with('success','Responsable créé avec succès.');
+        return redirect()->route('Admin.responsable.index') ->with('success','Responsable créé avec succès.');
     }
 
     /**
@@ -56,7 +56,7 @@ class ResponsableController extends Controller
     public function update(Request $request, Responsable $responsable)
     {
         $request->validate([ 'prenom' => 'required', 'nom' => 'required', 'email' => 'required','telephone'=>'required', ]); 
-        $responsable->update($request->all()); return redirect()->route('responsable.index') ->with('success','Responsable mis à jour avec succès.');
+        $responsable->update($request->all()); return redirect()->route('Admin.responsable.index') ->with('success','Responsable mis à jour avec succès.');
     }
 
     /**
@@ -65,6 +65,6 @@ class ResponsableController extends Controller
     public function destroy(Responsable $responsable)
     {
         $responsable->delete(); 
-        return redirect()->route('responsable.index') ->with('success','Responsable supprimé avec succès');
+        return redirect()->route('Admin.responsable.index') ->with('success','Responsable supprimé avec succès');
     }
 }

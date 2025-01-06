@@ -32,7 +32,7 @@ class CommandeController extends Controller
         $commande->statut = 'Livrée';
         $commande->save();
 
-        return redirect()->route('commande.index')->with('success', 'Commande marquée comme livrée.');
+        return redirect()->route('Admin.commande.index')->with('success', 'Commande marquée comme livrée.');
     }
 
     public function refuser($id)
@@ -41,7 +41,7 @@ class CommandeController extends Controller
         $commande->statut = 'Refusée ';
         $commande->save();
 
-        return redirect()->route('commande.index')->with('success', 'Commande refusée.');
+        return redirect()->route('Admin.commande.index')->with('success', 'Commande refusée.');
     }
 
 
@@ -79,7 +79,7 @@ class CommandeController extends Controller
     {
         $request->validate([ 'quantite'=>'required','produit_id'=>'required','status' => 'required', ]); 
         $commande->update($request->all()); 
-        return redirect()->route('commande.index') ->with('success','Commande mise à jour avec succès.');
+        return redirect()->route('Admin.commande.index') ->with('success','Commande mise à jour avec succès.');
     }
 
     /**
@@ -88,6 +88,6 @@ class CommandeController extends Controller
     public function destroy(Commande $commande)
     {
         $commande->delete(); 
-        return redirect()->route('commande.index') ->with('success','Commande supprimé avec succès');
+        return redirect()->route('Admin.commande.index') ->with('success','Commande supprimé avec succès');
     }
 }

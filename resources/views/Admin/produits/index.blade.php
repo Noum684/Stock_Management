@@ -37,9 +37,9 @@
         <td>{{ $prod->stock->quantite }}</td>
         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
             <x-action-buttons 
-                :show="route('Admin.produits.show', $prod->id)" 
-                :edit="route('Admin.produits.edit', $prod->id)" 
-                :delete="route('Admin.produits.destroy', $prod->id)" />
+                :show="route('Admin.produit.show', $prod->id)" 
+                :edit="route('Admin.produit.edit', $prod->id)" 
+                :delete="route('Admin.produit.destroy', $prod->id)" />
         </td>
     </tr>
     @endforeach

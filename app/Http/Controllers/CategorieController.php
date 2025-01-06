@@ -68,7 +68,7 @@ class CategorieController extends Controller
     {
         $request->validate([ 'nom' => 'required','description'=>'required', ]); 
         $categorie->update($request->all()); 
-        return redirect()->route('categorie.index') ->with('success','Categorie mise à jour avec succès.');
+        return redirect()->route('Admin.categorie.index') ->with('success','Categorie mise à jour avec succès.');
     }
 
     /**
@@ -77,6 +77,6 @@ class CategorieController extends Controller
     public function destroy(Categorie $categorie)
     {
         $categorie->delete(); 
-        return redirect()->route('categorie.index') ->with('success','Categorie supprimé avec succès');
+        return redirect()->route('Admin.categorie.index') ->with('success','Categorie supprimé avec succès');
     }
 }
