@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('nom');
             $table->string('description')->nullable();
             $table->decimal('prix', 8, 2);
-            $table->integer('quantite')->default(0);
             $table->unsignedBigInteger('categorie_id');
             $table->timestamps();
             $table->foreign('categorie_id')->references('id')->on('categorie')->onDelete('cascade');

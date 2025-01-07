@@ -43,7 +43,7 @@ class StockController extends Controller
      */
     public function show(Stock $stock)
     {
-        return view('Admin.stocks.show',compact('stock'));
+        return view('Admin.stocks.show',compact('stock',));
     }
 
     /**
@@ -51,7 +51,9 @@ class StockController extends Controller
      */
     public function edit(Stock $stock)
     {
-        return view('Admin.stocks.edit',compact('stock'));
+        $produits = Produit::all(); 
+        $pointVentes = PointVente::all(); 
+        return view('Admin.stocks.edit', compact('produits', 'pointVentes','stock'));
     }
 
     /**
@@ -74,7 +76,7 @@ class StockController extends Controller
         $stock->delete(); 
         return redirect()->route('Admin.stock.index') ->with('success','Stock supprimé avec succès');
     }
-    public function checkLowStock(){
+    public function checphpkLowStock(){
         $lowStocks= Stock::whereColumn('quantite','<','seuil_m')->get();
         return view('Admin.stock.low', compact('lowStocks'));
 

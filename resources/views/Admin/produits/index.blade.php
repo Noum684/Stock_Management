@@ -30,11 +30,10 @@
     @foreach ($produit as $prod)
     <tr>
         <td>{{ $prod->id }}</td>
-        <td>{{ $prod->produit->nom ?? 'Produit non défini' }}</td>
+        <td>{{ $prod->nom}}</td>
         <td>{{ $prod->categorie->nom }}</td>
-        <td>{{ $prod->prix }}</td>
         <td>{{ $prod->description }}</td>
-        <td>{{ $prod->stock->quantite }}</td>
+        <td>{{ $prod->prix }}</td>
         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
             <x-action-buttons 
                 :show="route('Admin.produit.show', $prod->id)" 

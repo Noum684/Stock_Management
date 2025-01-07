@@ -47,7 +47,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/Admin/pointVente/ create', [PointVenteController::class, 'create'])->name(('Admin.pointVente.create'));
     Route::get('/Admin/pointVente/edit', [PointVenteController::class, 'edit'])->name(('Admin.pointVente.edit'));
     Route::get('/Admin/pointVente/update', [PointVenteController::class, 'update'])->name(('Admin.pointVente.update'));
-    Route::get('/Admin/pointVente/store', [PointVenteController::class, 'store'])->name(('Admin.pointVente.store'));
+    Route::post('/Admin/pointVente/store', [PointVenteController::class, 'store'])->name(('Admin.pointVente.store'));
     Route::get('/Admin/pointVente/destroy', [PointVenteController::class, 'destroy'])->name(('Admin.pointVente.destroy'));
     Route::get('/Admin/pointVente/show', [PointVenteController::class, 'show'])->name(('Admin.pointVente.show'));
 
@@ -55,7 +55,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/Admin/produit/create', [ProduitController::class, 'create'])->name('Admin.produit.create');
     Route::get('/Admin/produit', [ProduitController::class, 'index'])->name('Admin.produit.index');
     Route::get('/Admin/produit/{id}/edit', [ProduitController::class, 'edit'])->name('Admin.produit.edit');
-    Route::get('/Admin/produit/store',[ProduitController::class,'store'])->name('Admin.produit.store');
+    Route::post('/Admin/produit/store',[ProduitController::class,'store'])->name('Admin.produit.store');
     Route::get('/Admin/produit/update',[ProduitController::class,'update'])->name('Admin.produit.update');
     Route::get('/Admin/produit/destroy',[ProduitController::class,'destroy'])->name('Admin.produit.destroy');
     Route::get('/Admin/produit/show',[ProduitController::class,'show'])->name('Admin.produit.show');
@@ -100,8 +100,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
     // Gestion des activités
-    Route::get('/Admin/activity', [ActivityController::class, 'index'])->name('Admin.activity.index');
-    Route::post('/Admin/activity', [ActivityController::class, 'store'])->name('Admin.activity.store');
+    Route::get('/Admin/activitie', [ActivityController::class, 'index'])->name('Admin.activities.create');
+    Route::post('/Admin/activitie', [ActivityController::class, 'store'])->name('Admin.activities.store');
 
     //  Paramètres;
     Route::get('/Admin/settings', [SettingController::class, 'index'])->name('Admin.settings.index');

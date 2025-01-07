@@ -12,8 +12,8 @@ class ActivityController extends Controller
 {
     public function index()
     {
-        $activitys = Activity::latest()->paginate(10);
-        return view('activitylog.index', compact('activitys'));
+        $activities  = Activity::latest()->paginate(10);
+        return view('Admin.Activitys.index', compact('activities'));
     }
     /**
      * Display the specified activity.
@@ -21,9 +21,9 @@ class ActivityController extends Controller
      * @param \Spatie\Activitylog\Models\Activity $activity
      * @return \Illuminate\View\View
      */
-    public function show(Activity $activity)
+    public function show(Activity $activitie)
     {
-        return view('activitys.show', compact('activity'));
+        return view('Admin.Activitys.show', compact('activitie'));
     }
     /**
      * Store a newly created resource in storage.
@@ -73,16 +73,20 @@ class ActivityController extends Controller
     {
         $request->validate([
             'log_name' => 'required|string|max:255',
+            'user_id'=>'required',
             'description' => 'required|string|max:500',
+            'subject_type'=>'required|string|max:500',
+            'subject_id'=>'required|integer', 
+            'properties'=>'required|string|max:500',
         ]);
 
         
 
-        return redirect()->route('activity.index')->with('success', 'Activité enregistrée avec succès.');
+        return redirect()->route('Admin.activitie.index')->with('success', 'Activité enregistrée avec succès.');
     }
-    public function destroy(Activity $activity)
+    public function destroy(Activity $activitie)
     {
-        $activity->delete();
-        return redirect()->route('activity.index')->with('success', 'Activité supprimée avec succès.');
+        $activitie->delete();
+        return redirect()->route('Admin.activitie.index')->with('success', 'Activité supprimée avec succès.');
     }
 }

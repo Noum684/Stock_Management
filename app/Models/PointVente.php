@@ -13,9 +13,9 @@ class PointVente extends Model
     public $incrementing = true;
     protected $fillable = ['id', 'nom', 'adresse', 'responsable_id'];
 
-    public function produits()
-    {
-        return $this->hasMany(Produit::class);
-    }
+    public function responsable()
+{
+    return $this->belongsTo(Responsable::class);
+}
 
 }

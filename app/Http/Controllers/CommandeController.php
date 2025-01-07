@@ -29,7 +29,7 @@ class CommandeController extends Controller
     public function livrer($id)
     {
         $commande = Commande::findOrFail($id);
-        $commande->statut = 'Livrée';
+        $commande->status = 'Livrée';
         $commande->save();
 
         return redirect()->route('Admin.commande.index')->with('success', 'Commande marquée comme livrée.');
@@ -38,7 +38,7 @@ class CommandeController extends Controller
     public function refuser($id)
     {
         $commande = Commande::findOrFail($id);
-        $commande->statut = 'Refusée ';
+        $commande->status = 'Refusée ';
         $commande->save();
 
         return redirect()->route('Admin.commande.index')->with('success', 'Commande refusée.');
@@ -50,7 +50,7 @@ class CommandeController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([ 'quantite'=>'required','produit_id'=>'required','status' => 'required',]);
+        $request->validate([ 'produit_id'=>'required','quantite'=>'required','status' => 'required',]);
         Commande::create($request->all()); 
         return redirect()->route('commande.index') ->with('success','Commande créé avec succès.');
     }
@@ -69,7 +69,8 @@ class CommandeController extends Controller
     public function edit(Commande $commande)
     {
         
-        return view('Admin.commandes.edit',compact('commande'));
+        $produits= Produit::all();
+        return view('Admin.commandes.edit',compact('produits','commande'));
     }
 
     /**
@@ -77,7 +78,7 @@ class CommandeController extends Controller
      */
     public function update(Request $request, Commande $commande)
     {
-        $request->validate([ 'quantite'=>'required','produit_id'=>'required','status' => 'required', ]); 
+        $request->validate([ 'produit_id'=>'required','quantite'=>'required','status' => 'required', ]); 
         $commande->update($request->all()); 
         return redirect()->route('Admin.commande.index') ->with('success','Commande mise à jour avec succès.');
     }

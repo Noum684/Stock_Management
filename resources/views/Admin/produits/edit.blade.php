@@ -18,7 +18,7 @@
              @endforeach </ul> 
 </div> 
 @endif 
-<form action="{{ route('Admin.produit.update',$produit->produit_id) }}" method="post"> 
+<form action="{{ route('Admin.produit.update',$produit->id) }}" method="post"> 
 @csrf
 @method('PUT') 
 <div class="row mb-3"> 
@@ -42,26 +42,17 @@
     </div>
     <div class="col-12 mb-3"> 
         <div class="form-group"> 
+            <strong>Description:</strong> <input type="text" name="description" value="{{ $produit->description}}" class="form-control" placeholder="Saisir la description"> 
+        </div> 
+    </div>
+    <div class="col-12 mb-3"> 
+        <div class="form-group"> 
             <strong>Prix:</strong> 
             <input type="text" name="prix" value="{{ $produit->prix}}" class="form-control" placeholder="Saisir le prix du produit"> 
         </div> 
     </div> 
-    <div class="col-12 mb-3"> 
-        <div class="form-group"> 
-            <strong>Description:</strong> <input type="text" name="description" value="{{ $produit->description}}" class="form-control" placeholder="Saisir la description"> 
-        </div> 
-    </div> 
-    <div class="col-12 mb-3">
-        <div class="form-group">
-            <strong>Stock:</strong>
-            <select name="categorie_id" class="form-control">
-                @foreach($stok as $stocks)
-                    <option value="{{ $stocks->stock_id }}" {{ $produit->stock_id == $stocks->stock_id ? 'selected' : '' }}>
-                        {{ $stocks->quantite }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
+     
+    
     </div>
 </div>
 <div class="row"> 

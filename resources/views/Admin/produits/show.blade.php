@@ -26,17 +26,12 @@
     </div> 
     <div class="col-12 mb-3"> 
         <div class="form-group"> 
-            <strong>Prix Unitaire: </strong> {{ $produit->prix }} 
-        </div>
-    </div>
-    <div class="col-12 mb-3"> 
-        <div class="form-group"> 
             <strong>Description : </strong> {{ $produit->description }} 
         </div>
     </div>
     <div class="col-12 mb-3"> 
         <div class="form-group"> 
-            <strong>Stock : </strong> {{ $produit->stock_id }} 
+            <strong>Prix Unitaire: </strong> {{ $produit->prix }} 
         </div>
     </div>
 </div> 

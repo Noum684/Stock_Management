@@ -11,13 +11,17 @@ class Commande extends Model
     protected $table="commande"; 
     public $primaryKey = 'id'; 
     public $incrementing = true; 
-    protected $fillable = [ 'id','quantite','produit_id', 'status'];
+    protected $fillable = [ 'id','produit_id','quantite', 'status'];
 
-    public function produits()
+    public function produit()
     {
-        return $this->belongsToMany(Produit::class)->withPivot('quantite');
+        return $this->belongsTo(Produit::class);
     }
-
+    
+    public function responsable()
+    {
+        return $this->belongsTo(Responsable::class);
+    }
 
     public function calculerTotalCommande($commandeId)
 {
@@ -31,10 +35,6 @@ class Commande extends Model
     $commande->save();
 
     return $total;
-}
-public function produit()
-{
-    return $this->belongsTo(Produit::class);
 }
 
 }

@@ -7,9 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Produit extends Model
 {
-    use HasFactory; protected $table="produit"; public $primaryKey = 'id';
-     public $incrementing = true; 
-     protected $fillable = [ 'id','nom','categorie_id','description','prix','quantite'];
+    use HasFactory;
+    protected $table="produit"; 
+    public $primaryKey = 'id';
+    public $incrementing = true; 
+    protected $fillable = [ 'id','nom','categorie_id','description','prix'];
 
 
      public function stock()

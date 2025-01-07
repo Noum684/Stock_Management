@@ -50,7 +50,8 @@ class PointVenteController extends Controller
      */
     public function edit(PointVente $pointVente)
     {
-        return view('Admin.pointVentes.edit',compact('pointVente'));
+        $responsables = Responsable::all(); 
+        return view('Admin.pointVentes.edit', compact('responsables','pointVente')); 
     }
 
     /**

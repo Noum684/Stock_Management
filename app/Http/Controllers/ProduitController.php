@@ -31,7 +31,7 @@ class ProduitController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(['nom' => 'required',  'categorie_id' => 'required','description' => 'required','prix' => 'required','quantite' => 'required',]);
+        $request->validate(['nom' => 'required',  'categorie_id' => 'required','description' => 'required','prix' => 'required',]);
         Produit::create($request->all()); return redirect()->route('Admin.produit.index') ->with('success','Produit créé avec succès.');
     }
 
@@ -49,7 +49,7 @@ class ProduitController extends Controller
     public function edit($id)
     {
         $produit=Produit::findOrFail($id);
-        $categories=Categorie::all();
+        $categorie=Categorie::all();
         return view('Admin.produits.edit',compact('produit','categorie'));
     }
  
@@ -58,7 +58,7 @@ class ProduitController extends Controller
      */
     public function update(Request $request, Produit $produit)
     {
-        $request->validate(['nom' => 'required',  'categorie_id' => 'required','description' => 'required','prix' => 'required','quantite' => 'required',]);
+        $request->validate(['nom' => 'required',  'categorie_id' => 'required','description' => 'required','prix' => 'required',]);
         $produit->update($request->all()); 
         return redirect()->route('Admin.produit.index') ->with('success','Produit mis à jour avec succès.');
     }

@@ -29,13 +29,16 @@
     <div class="row mb-3">
         <div class="col-12 mb-3">
             <div class="form-group">
-                <strong>Nom du produit:</strong>
+                <label for="produit_id"><strong>Nom du produit:</strong></label>
                 @if($produits->isEmpty())
-                    <p>Aucun produit disponible.</p>
+                    <p class="text-danger">Aucun produit disponible.</p>
                 @else
-                    <select name="produit_id" class="form-select">
+                    <select name="produit_id" id="produit_id" class="form-select">
+                        <option value="">-- Sélectionnez un produit --</option>
                         @foreach($produits as $produit)
-                            <option value="{{ $produit->id }}">{{ $produit->nom }}</option>
+                            <option value="{{ $produit->produit_id }}" {{ old('produit_id') == $produit->produit_id ? 'selected' : '' }}>
+                                {{ $produit->nom }}
+                            </option>
                         @endforeach
                     </select>
                 @endif
@@ -47,17 +50,29 @@
                 <input type="number" name="quantite" class="form-control" placeholder="Saisir la quantite de la commande">
             </div>
         </div>
+        
         <div class="col-12 mb-3">
-            <div class="form-group">
-                <strong>Status:</strong>
-                <select name="status" class="form-control">
-                    <option value="En attente">En attente</option>
-                    <option value="Refusée">Refusée</option>
-                    <option value="Livrée">Livrée</option>
-                </select>
-            </div>
+        <div class="form-group">
+            <label for="responsable_id">Responsable</label>
+            <select name="responsable_id" id="responsable_id" class="form-control">
+                @foreach($responsables as $responsable)
+                    <option value="{{ $responsable->id }}">{{ $responsable->nom }} {{ $responsable->prenom }}</option>
+                @endforeach
+            </select>
         </div>
     </div>
+    <div class="col-12 mb-3">
+        <div class="form-group">
+            <label for="status"><strong>Status:</strong></label>
+            <select name="status" id="status" class="form-control">
+                <option value="En attente" {{ old('status') == 'En attente' ? 'selected' : '' }}>En attente</option>
+                <option value="Refusée" {{ old('status') == 'Refusée' ? 'selected' : '' }}>Refusée</option>
+                <option value="Livrée" {{ old('status') == 'Livrée' ? 'selected' : '' }}>Livrée</option>
+            </select>
+        </div>
+    </div>
+    </div>
+    
     <div class="row">
             <div class="col-12  ">
                 <button type="submit" class="btn btn-primary">Enregistrer</button>

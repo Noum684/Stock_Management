@@ -11,7 +11,10 @@ class Activity extends SpatieActivity
 {
     use HasFactory;
 
-    protected $fillable = ['description', 'causer_id', 'subject_type', 'subject_id', 'properties'];
+    protected $fillable = ['log_name','description', 'users_id', 'subject_type', 'subject_id', 'properties'];
      
-    
+    public function users()
+{
+    return $this->belongsTo(User::class);
+}
 }

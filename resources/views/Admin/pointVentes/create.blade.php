@@ -41,13 +41,14 @@
         </div>
         <div class="col-12 mb-3">
             <div class="form-group">
-                <strong>Responsable:</strong>
-                <select name="responsable_id" class="form-control">
-                    @foreach($responsables as $responsable)
-                        <option value="{{ $responsable->responsable_id }}">{{ $responsable->prenom }} {{ $responsable->nom }}</option>
-                    @endforeach
-                </select>
-            </div>
+            <label for="responsable_id">Responsable</label>
+            <select name="responsable_id" id="responsable_id" class="form-control" required>
+                <option value="">-- Sélectionnez un responsable --</option>
+                @foreach($responsables as $responsable)
+                    <option value="{{ $responsable->id }}">{{ $responsable->nom }} {{ $responsable->prenom }}</option>
+                @endforeach
+            </select>
+</div>
         </div>
     </div>
 

@@ -36,7 +36,7 @@
                 @else
                     <select name="produit_id" class="form-select">
                         @foreach($produits as $produit)
-                            <option value="{{ $produit->id }}">{{ $produit->nom }}</option>
+                            <option value="{{ $produit->produit_id }}">{{ $produit->nom }}</option>
                         @endforeach
                     </select>
                 @endif

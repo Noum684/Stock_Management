@@ -17,7 +17,7 @@
             @foreach ($errors->all() as $error) <li>{{ $error }}</li>
              @endforeach </ul> 
 </div> 
-@endif <form action="{{ route('pointVente.update',$pointVente->pointVente_id) }}" method="post"> 
+@endif <form action="{{ route('pointVente.update',$pointVente->id) }}" method="post"> 
 @csrf @method('PUT') 
 
 <div class="row mb-3"> 

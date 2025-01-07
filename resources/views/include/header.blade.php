@@ -70,7 +70,6 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <!--<h6 class="collapse-header">Ajouter un prduit:</h6>-->
                         <a class="collapse-item" href="{{ route('Admin.stock.index') }}">Nos stocks</a>
-                        <a class="collapse-item" href="{{ route('Admin.stock.create') }}">Ajouter un prduit</a>
                         <a class="collapse-item" href="{{ route('Admin.stock.edit', ['id' => 1]) }}">Modifier un produit</a>
                     </div>
                 </div>
@@ -91,7 +90,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <!--<h6 class="collapse-header">Custom Utilities:</h6>-->
                         <a class="collapse-item" href="{{route('Admin.commande.index') }}">Nos commande</a>
-                        <a class="collapse-item" href="{{route('Admin.commande.index') }}">Passer une commande</a>
+                        <a class="collapse-item" href="{{route('Admin.commande.create') }}">Passer une commande</a>
                         <a class="collapse-item" href="{{route('Admin.commande.edit',['id'=>1])}}">Modifier une commande</a>
                         <a class="collapse-item" href="{{route('Admin.produit.create')}}">Nouveau un produit</a>
                         <a class="collapse-item" href="{{route('Admin.categorie.create')}}">Nouvelle catégories</a>

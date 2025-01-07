@@ -21,6 +21,7 @@
         <th>Numéro</th>
         <th>Nom du produit</th>
         <th>Quantité Commandée</th>
+        <th>Responsable</th>
         <th>Status</th>
         <th width="280px">Action</th>
     </tr>
@@ -29,6 +30,8 @@
         <td>{{ $com->id }}</td>
         <td>{{ $com->produit->nom ?? 'Produit non défini' }}</td>
         <td>{{ $com->quantite }}</td>
+        <td> {{$com->responsable->prenom
+            $com->responsable->nom}}</td>
         <td>{{ ucfirst($commande->statut) }}</td>
                     <td>
                         @if($commande->statut == 'En attente')
