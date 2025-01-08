@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Commande;
 use App\Models\Produit;
+use App\Models\Responsable;
 use Illuminate\Http\Request;
 
 class CommandeController extends Controller
@@ -24,7 +25,8 @@ class CommandeController extends Controller
     public function create()
     {
         $produits= Produit::all();
-        return view('Admin.commandes.create',compact('produits'));
+        $responsables=Responsable::all();
+        return view('Admin.commandes.create',compact('produits','responsables'));
     }
     public function livrer($id)
     {
@@ -50,16 +52,26 @@ class CommandeController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([ 'produit_id'=>'required','quantite'=>'required','status' => 'required',]);
-        Commande::create($request->all()); 
-        return redirect()->route('commande.index') ->with('success','Commande créé avec succès.');
+        $request->validate([ 
+        'responsable_id' => 'required|exists:responsable,id',
+        'produit' => 'required|array',
+        'produit.*.id' => 'exists:produit,id',
+        'produit.*.quantite' => 'integer|min:1',]);
+        $commande = Commande::create(['responsable_id' => $request->responsable_id]);
+
+        foreach ($request->produits as $produit) {
+            $commande->produits()->attach($produit['id'], ['quantite' => $produit['quantite']]);
+        }
+
+        return redirect()->route('Admin.commande.index')->with('success', 'Commande créée.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Commande $commande)
+    public function show($id)
     {
+        $order = Commande::findOrFail($id);
         return view('Admin.commandes.show',compact('commande'));
     }
 
@@ -70,7 +82,8 @@ class CommandeController extends Controller
     {
         
         $produits= Produit::all();
-        return view('Admin.commandes.edit',compact('produits','commande'));
+        $responsables=Responsable::all();
+        return view('Admin.commandes.edit',compact('produits','responsables','commande'));
     }
 
     /**
@@ -78,7 +91,7 @@ class CommandeController extends Controller
      */
     public function update(Request $request, Commande $commande)
     {
-        $request->validate([ 'produit_id'=>'required','quantite'=>'required','status' => 'required', ]); 
+        $request->validate([ 'produit_id'=>'required|exists:produit,id','quantite'=>'required','status' => 'required', ]); 
         $commande->update($request->all()); 
         return redirect()->route('Admin.commande.index') ->with('success','Commande mise à jour avec succès.');
     }

@@ -100,8 +100,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
     // Gestion des activités
-    Route::get('/Admin/activitie', [ActivityController::class, 'index'])->name('Admin.activities.create');
-    Route::post('/Admin/activitie', [ActivityController::class, 'store'])->name('Admin.activities.store');
+    Route::get('/Admin/Activitys', [ActivityController::class, 'index'])->name('Admin.activitys.index');
+    Route::get('/Admin/activitys', [ActivityController::class, 'create'])->name('Admin.activitys.create');
+    Route::post('/Admin/activitys', [ActivityController::class, 'store'])->name('Admin.activitys.store');
 
     //  Paramètres;
     Route::get('/Admin/settings', [SettingController::class, 'index'])->name('Admin.settings.index');

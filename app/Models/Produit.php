@@ -16,11 +16,14 @@ class Produit extends Model
 
      public function stock()
     {
-        return $this->hasOne(Stock::class);
+        return $this->hasMany(Stock::class);
     }
     public function commandes()
     {
         return $this->hasMany(Commande::class);
+    }
+    public function categorie(){
+        return $this->belongsTo(Categorie::class);
     }
 
     

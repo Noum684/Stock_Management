@@ -27,6 +27,7 @@ class Stock extends Model
     {
         return $this->belongsTo(Responsable::class);
     }
+    
 
 
 

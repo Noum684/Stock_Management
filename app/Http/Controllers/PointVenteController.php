@@ -32,7 +32,7 @@ class PointVenteController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([ 'nom' => 'required', 'adresse' => 'required', 'responsable_id' => 'required', ]);
+        $request->validate([ 'nom' => 'required', 'adresse' => 'required', 'responsable_id' => 'required|exists:responsable,id', ]);
         PointVente::create($request->all()); 
         return redirect()->route('Admin.pointVente.index') ->with('success','Point de vente créé avec succès.');
     }
@@ -59,7 +59,7 @@ class PointVenteController extends Controller
      */
     public function update(Request $request, PointVente $pointVente)
     {
-        $request->validate([ 'nom' => 'required', 'adresse' => 'required', 'responsable_id' => 'required', ]); 
+        $request->validate([ 'nom' => 'required', 'adresse' => 'required', 'responsable_id' => 'required|exists:responsable,id', ]); 
         $pointVente->update($request->all()); 
         return redirect()->route('Admin.pointVente.index') ->with('success','Point de vente mis à jour avec succès.');
     }

@@ -12,8 +12,8 @@ class ActivityController extends Controller
 {
     public function index()
     {
-        $activities  = Activity::latest()->paginate(10);
-        return view('Admin.Activitys.index', compact('activities'));
+        $activitys  = Activity::latest()->paginate(10);
+        return view('Admin.Activitys.index', compact('activitys'));
     }
     /**
      * Display the specified activity.
@@ -21,9 +21,9 @@ class ActivityController extends Controller
      * @param \Spatie\Activitylog\Models\Activity $activity
      * @return \Illuminate\View\View
      */
-    public function show(Activity $activitie)
+    public function show(Activity $activity)
     {
-        return view('Admin.Activitys.show', compact('activitie'));
+        return view('Admin.Activitys.show', compact('activity'));
     }
     /**
      * Store a newly created resource in storage.
@@ -82,11 +82,11 @@ class ActivityController extends Controller
 
         
 
-        return redirect()->route('Admin.activitie.index')->with('success', 'Activité enregistrée avec succès.');
+        return redirect()->route('Admin.activitys.index')->with('success', 'Activité enregistrée avec succès.');
     }
     public function destroy(Activity $activitie)
     {
         $activitie->delete();
-        return redirect()->route('Admin.activitie.index')->with('success', 'Activité supprimée avec succès.');
+        return redirect()->route('Admin.activitys.index')->with('success', 'Activité supprimée avec succès.');
     }
 }

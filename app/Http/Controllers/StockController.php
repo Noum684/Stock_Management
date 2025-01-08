@@ -33,7 +33,7 @@ class StockController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(['quantite' => 'required','produit_id' => 'required','point_vente_id'=>'required','seuil_m' => 'required',]);
+        $request->validate(['quantite' => 'required','required|exists:produit,id' => 'required','point_vente_id'=>'required|exists:point_vente,id','seuil_m' => 'required',]);
         Stock::create($request->all());
         return redirect()->route('Admin.stock.index') ->with('success','Stock créé avec succès.');
     }

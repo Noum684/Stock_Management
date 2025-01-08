@@ -12,4 +12,8 @@ class Categorie extends Model
     public $primaryKey = 'id'; 
     public $incrementing = true; 
     protected $fillable = [ 'id', 'nom','description'];
+
+    public function produit(){
+        return $this->hasMany(Produit::class);
+    }
 }

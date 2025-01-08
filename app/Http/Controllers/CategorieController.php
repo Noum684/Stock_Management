@@ -34,11 +34,7 @@ class CategorieController extends Controller
             'description' => 'required|string|max:1000',
         ]);
     
-        // Création de la catégorie
-        Categorie::create([
-            'nom' => $request->input('nom'),
-            'description' => $request->input('description'),
-        ]);
+        Categorie::create($request->all());
     
         // Redirection avec succès
         return redirect()->route('Admin.categorie.index')
