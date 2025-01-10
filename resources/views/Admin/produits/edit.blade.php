@@ -30,12 +30,11 @@
     </div> 
     <div class="col-12 mb-3">
         <div class="form-group">
-            <strong>Catégorie:</strong>
-            <select name="categorie_id" class="form-control">
+            <label for="categorie_id">Catégorie</label>
+            <select name="categorie_id" id="categorie_id" class="form-control" >
+                <option value="">-- Sélectionnez une catégorie --</option>
                 @foreach($categorie as $cat)
-                    <option value="{{ $cat->categorie_id }}" {{ $produit->categorie_id == $cat->categorie_id ? 'selected' : '' }}>
-                        {{ $categorie->nom }}
-                    </option>
+                    <option value="{{ $cat->id }}">{{ $cat->nom }}</option>
                 @endforeach
             </select>
         </div>
@@ -51,14 +50,13 @@
             <input type="text" name="prix" value="{{ $produit->prix}}" class="form-control" placeholder="Saisir le prix du produit"> 
         </div> 
     </div> 
-     
-    
     </div>
-</div>
+
 <div class="row"> 
     <div class="col-12  "> 
         <button type="submit" class="btn btn-primary">Modifier</button> 
-    </div> </div> 
+    </div> 
+</div> 
 </form> 
 @endsection
  

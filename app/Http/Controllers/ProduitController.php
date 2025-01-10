@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Categorie;
 use App\Models\Produit;
 use Illuminate\Http\Request;
-use Barryvdh\DomPDF\Facade\Pdf;
+// use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Pdf;
 
 class ProduitController extends Controller
@@ -13,9 +13,14 @@ class ProduitController extends Controller
     /**
      * Display a listing of the resource.
      */
+    
+        // Recherche
+        
+    
     public function index()
+
     {
-        $produits = Produit::with('categorie')->get(); 
+        $produit = Produit::latest()->paginate(4); 
         return view('Admin.produits.index',
         compact('produit')) ->with('i', (request()->input('page', 1) - 1) * 4);
     }

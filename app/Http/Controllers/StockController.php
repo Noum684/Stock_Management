@@ -62,9 +62,8 @@ class StockController extends Controller
     public function update(Request $request,$id)
     {
         
-        $request->validate([ 'quantite' => 'required| integer',]); 
-        $stock=Stock::findOrFail($id);
-        $stock->update(['quantite'=>$request->quantite]); 
+        $stock = Stock::findOrFail($id);
+        $stock->update($request->all());
         return redirect()->route('Admin.stock.index') ->with('success','Stock mis à jour avec succès.');
     }
 

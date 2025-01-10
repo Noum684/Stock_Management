@@ -12,6 +12,7 @@
         "php": "^8.2",
         "consoletvs/charts": "*",
         "laravel/framework": "^11.31",
+        "laravel/scout": "^10.11",
         "laravel/tinker": "^2.9",
         "spatie/laravel-activitylog": "^4.9",
         "spatie/laravel-permission": "^6.10"

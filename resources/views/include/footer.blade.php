@@ -35,31 +35,55 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    const ctx = document.getElementById('stocksChart').getContext('2d');
+    const ctx = document.getElementById('commandeChart').getContext('2d');
+    const data = @json($commandeData); // Données envoyées depuis le contrôleur
+
     const chart = new Chart(ctx, {
-        type: 'bar',
+        type: 'pie',
         data: {
-            labels: ['Stock Critique', 'Quantité Totale'], // Noms des catégories
+            labels: data.labels, // Labels des statuts
             datasets: [{
-                label: 'Statistiques des Stocks',
-                data: [{{ $stocksCritiques }}, {{ $totalQuantiteStock }}], // Données des stocks
-                backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)'],
-                borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)'],
+                label: 'Répartition des commandes',
+                data: data.values, // Valeurs des commandes
+                backgroundColor: [
+                    '#FF6384', // Couleur pour 'En attente'
+                    '#36A2EB', // Couleur pour 'Livrée'
+                    '#FFCE56', // Couleur pour 'Refusée'
+                    '#4BC0C0', // Ajoutez d'autres couleurs si nécessaire
+                ],
+                borderColor: '#fff',
                 borderWidth: 1
             }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'bottom',
+                    labels: {
+                        font: {
+                            size: 14
+                        },
+                        color: '#333'
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.label || '';
+                            let value = context.raw || 0;
+                            return `${label}: ${value} commandes`;
+                        }
+                    }
+                }
+            }
         }
     });
-    const data = {
-        labels: ['Livrées', 'En Attente', 'Refusées'],
-        datasets: [{
-            label: 'Statistiques des Commandes',
-            data: [{{ $livrees }}, {{ $enAttente }}, {{ $refusees }}],
-            backgroundColor: ['#28a745', '#ffc107', '#dc3545'], // Couleurs pour chaque statut
-            borderColor: ['#28a745', '#ffc107', '#dc3545'],
-            borderWidth: 1
-        }]
-    };
+</script>
 
+
+    <script>
     // Configuration du graphique
     const config = {
         type: 'pie',

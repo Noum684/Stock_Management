@@ -62,7 +62,10 @@ class CategorieController extends Controller
      */
     public function update(Request $request, Categorie $categorie)
     {
-        $request->validate([ 'nom' => 'required','description'=>'required', ]); 
+        $request->validate([
+            'nom' => 'required|string|max:255',
+            'description' => 'required|string|max:1000',
+        ]); 
         $categorie->update($request->all()); 
         return redirect()->route('Admin.categorie.index') ->with('success','Categorie mise à jour avec succès.');
     }

@@ -24,7 +24,6 @@
         <th>Catégorie</th>
         <th>Prix Unitaire</th>
         <th>Description</th>
-        <th>Stock</th>
         <th width="280px">Action</th>
     </tr>
     @foreach ($produit as $prod)

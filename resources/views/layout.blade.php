@@ -112,7 +112,7 @@
             <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <a class="collapse-item" href="{{route('Admin.commande.index') }}">Nos commandes</a>
-                    <a class="collapse-item" href="{{route('Admin.commande.index') }}">Passer une commande</a>
+                    <a class="collapse-item" href="{{route('Admin.commande.create') }}">Passer une commande</a>
                     <a class="collapse-item" href="{{route('Admin.commande.edit', ['id' =>1]) }}">Modifier une commande</a>
                     <a class="collapse-item" href="{{route('Admin.produit.create')}}">Nouveau produit</a>
                     <a class="collapse-item" href="{{route('Admin.categorie.create')}}">Nouvelle catégorie</a>

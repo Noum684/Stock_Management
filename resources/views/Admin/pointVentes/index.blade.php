@@ -32,9 +32,9 @@
         <td>{{ $pointVent->responsable->nom }}</td>
         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
             <x-action-buttons 
-                :show="route('Admin.pointVente.show', $pointVent->id)" 
-                :edit="route('Admin.pointVente.edit', $pointVent->id)" 
-                :delete="route('Admin.pointVente.destroy', $pointvent->id)" />
+                :show="route('Admin.commande.show', $pointVent->id)" 
+                :edit="route('Admin.commande.edit', $pointVent->id)" 
+                :delete="route('Admin.commande.destroy', $pointVent->id)" />
         </td>
     </tr>
     @endforeach

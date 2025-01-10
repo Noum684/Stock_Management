@@ -11,7 +11,7 @@ class Commande extends Model
     protected $table="commande"; 
     public $primaryKey = 'id'; 
     public $incrementing = true; 
-    protected $fillable = [ 'id','produit_id','quantite', 'status'];
+    protected $fillable = [ 'id','produit_id','quantite','responsable_id', 'status'];
 
     public function produit()
     {

@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use Laravel\Scout\Searchable; 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Produit extends Model
 {
     use HasFactory;
+    
     protected $table="produit"; 
     public $primaryKey = 'id';
     public $incrementing = true; 

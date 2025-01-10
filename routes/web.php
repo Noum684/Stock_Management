@@ -14,6 +14,7 @@ use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StatistiqueController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SearchController;
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
@@ -65,13 +66,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/Admin/stock/create', [StockController::class, 'create'])->name('Admin.stock.create');
     Route::post('/Admin/stock/store', [StockController::class, 'store'])->name('Admin.stock.store');
     Route::get('/Admin/stock/{id}/edit', [StockController::class, 'edit'])->name('Admin.stock.edit');
-    Route::get('/Admin/stock/update',[StockController::class,'update'])->name('Admin.stock.update');
+    Route::put('/Admin/stock/update/{id}',[StockController::class,'update'])->name('Admin.stock.update');
     Route::get('/Admin/stock/destroy',[StockController::class,'destroy'])->name('Admin.stock.destroy');
     Route::get('/Admin/stock/show',[StockController::class,'show'])->name('Admin.stock.show');
 
     // Gestion des commandes
     Route::get('/Admin/commande', [CommandeController::class, 'index'])->name('Admin.commande.index');
-    Route::get('/Admin/commande/create', [CommandeController::class, 'create'])->name('Admin.commande.create');
+    Route::get('/Admin/commande/create ', [CommandeController::class, 'create'])->name('Admin.commande.create');
     Route::get('/Admin/commande/update', [CommandeController::class, 'update'])->name('Admin.commande.update');
     Route::get('/Admin/commande/{id}/edit', [CommandeController::class, 'edit'])->name('Admin.commande.edit');
     Route::post('/Admin/commande/store',[CommandeController::class,'store'])->name('Admin.commande.store');
@@ -114,6 +115,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Statistiques
     Route::get('/Admin/statistiques', [StatistiqueController::class, 'index'])->name('Admin.statistiques.index');
     Route::get('/statistiques/export', [StatistiqueController::class, 'export'])->name('statistiques.export');
+
+    // Recherches
+    Route::get('/Admin/search', [SearchController::class, 'search'])->name('search');
+
 
 
 });

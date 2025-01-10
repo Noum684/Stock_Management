@@ -3,12 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Commande;
+use App\Services\ServiceStock;
 use App\Models\Produit;
 use App\Models\Responsable;
 use Illuminate\Http\Request;
 
 class CommandeController extends Controller
 {
+    protected $stockService;
+
+    public function __construct(ServiceStock $stockService)
+    {
+        $this->stockService = $stockService;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -53,15 +60,25 @@ class CommandeController extends Controller
     public function store(Request $request)
     {
         $request->validate([ 
-        'responsable_id' => 'required|exists:responsable,id',
-        'produit' => 'required|array',
-        'produit.*.id' => 'exists:produit,id',
-        'produit.*.quantite' => 'integer|min:1',]);
-        $commande = Commande::create(['responsable_id' => $request->responsable_id]);
+            'responsable_id' => 'required|exists:responsable,id',
+            'produit_id' => 'required|exists:produit,id',
+            'quantite' => 'integer|min:1',
+    ]);
+        if (!$this->stockService->verifierDisponibilite($request->produit_id, $request->quantite)) {
+            return back()->withErrors(['message' => 'Stock insuffisant pour ce produit.']);
+        }
+
+        $commande = Commande::create([
+            'responsable_id' => $request->responsable_id,
+            'produit_id'=>$request->produit_id,
+            'quantite'=>$request->quantite,
+            'status' => 'En attente',
+        ]);
 
         foreach ($request->produits as $produit) {
             $commande->produits()->attach($produit['id'], ['quantite' => $produit['quantite']]);
         }
+        $this->stockService->diminuerStock($request->produit_id, $request->quantite);
 
         return redirect()->route('Admin.commande.index')->with('success', 'Commande créée.');
     }
@@ -91,7 +108,11 @@ class CommandeController extends Controller
      */
     public function update(Request $request, Commande $commande)
     {
-        $request->validate([ 'produit_id'=>'required|exists:produit,id','quantite'=>'required','status' => 'required', ]); 
+        $request->validate([ 
+            'responsable_id' => 'required|exists:responsable,id',
+            'produit_id' => 'required|exists:produit,id',
+            'quantite' => 'integer|min:1',
+        ]);
         $commande->update($request->all()); 
         return redirect()->route('Admin.commande.index') ->with('success','Commande mise à jour avec succès.');
     }

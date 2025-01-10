@@ -35,13 +35,14 @@
         </div>
         <div class="col-12 mb-3">
             <div class="form-group">
-                <strong>Catégorie:</strong>
-                <select name="categorie_id" class="form-control">
+                <label for="categorie_id">Catégorie</label>
+                <select name="categorie_id" id="categorie_id" class="form-control" >
+                    <option value="">-- Sélectionnez une catégorie --</option>
                     @foreach($categorie as $cat)
-                        <option value="{{ $cat->categorie_id }}">{{ $categorie->nom }}</option>
+                        <option value="{{ $cat->id }}">{{ $cat->nom }}</option>
                     @endforeach
                 </select>
-            </div>
+    </div>
         </div>
         <div class="col-12 mb-3">
             <div class="form-group">

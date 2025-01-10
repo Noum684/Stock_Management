@@ -12,13 +12,13 @@
 <div class="row mb-3"> 
     <div class="col-12 mb-3"> 
         <div class="form-group"> 
-            <strong>Numéro: </strong> {{ $stock>id }} 
+            <strong>Numéro: </strong> {{ $stock->id }} 
         </div> 
     </div> 
      
     <div class="col-12 mb-3> 
         <div class="form-group"> 
-            <strong>Nom du produit: </strong> {{ $stock->produit_id }} 
+            <strong>Nom du produit: </strong> {{ $stock->produit->nom }} 
         </div> 
     </div>
     <div class="col-12 mb-3"> 
@@ -27,7 +27,7 @@
     </div> 
     <div class="col-12 mb-3"> 
         <div class="form-group"> 
-            <strong>Localisation: </strong> {{ $stock->point_vente_id }} 
+            <strong>Localisation: </strong> {{ $stock->pointVvente->nom }} 
         </div>
     </div> 
 </div> 
