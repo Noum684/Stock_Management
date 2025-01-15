@@ -16,8 +16,13 @@ return new class extends Migration
             $table->integer('quantite');
             $table->unsignedBigInteger('produit_id');
             $table->foreign('produit_id')->references('id')->on('produit')->onDelete('cascade');
+            $table->unsignedBigInteger('source_point_vente_id');
+            $table->foreign('source_point_vente_id')->references('id')->on('point_vente')->onDelete('cascade');
+            $table->unsignedBigInteger('destination_point_vente_id');
+            $table->foreign('destination_point_vente_id')->references('id')->on('point_vente')->onDelete('cascade');
             $table->enum('status',['En attente','Refusée','Livrée']);
             $table->timestamps();
+            
         });
     }
 

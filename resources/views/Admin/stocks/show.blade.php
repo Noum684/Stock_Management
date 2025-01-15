@@ -12,22 +12,33 @@
 <div class="row mb-3"> 
     <div class="col-12 mb-3"> 
         <div class="form-group"> 
-            <strong>Numéro: </strong> {{ $stock->id }} 
+            <p><strong>Numéro: </strong> {{ $stock->id }} </p>
         </div> 
     </div> 
      
-    <div class="col-12 mb-3> 
+    <div class="col-12 mb-3"> 
         <div class="form-group"> 
-            <strong>Nom du produit: </strong> {{ $stock->produit->nom }} 
+            <p><strong>Nom du produit: </strong> {{ $stock->produit->nom }} </p>
         </div> 
     </div>
     <div class="col-12 mb-3"> 
-        <div class="form-group"> <strong>Quantité de stock: </strong> {{ $stock->quantite }} 
+        <div class="form-group"> 
+            <p><strong>Quantité de stock: </strong> {{ $stock->quantite }} </p>
         </div> 
     </div> 
     <div class="col-12 mb-3"> 
         <div class="form-group"> 
-            <strong>Localisation: </strong> {{ $stock->pointVvente->nom }} 
+            <p><strong>Localisation: </strong> {{ $stock->pointVvente->nom }} </p>
+        </div>
+    </div>
+    <div class="col-12 mb-3"> 
+        <div class="form-group"> 
+            <p><strong>Entrepôt: </strong> {{ $stock->pointVvente->nom }} </p>
+        </div>
+    </div>
+    <div class="col-12 mb-3"> 
+        <div class="form-group"> 
+            <p><strong>Point de vente: </strong> {{ $stock->pointVvente->nom }}</p> 
         </div>
     </div> 
 </div> 

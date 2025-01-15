@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Commande;
+use App\Models\PointVente;
 use App\Services\ServiceStock;
 use App\Models\Produit;
-use App\Models\Responsable;
+use App\Models\Stock;
 use Illuminate\Http\Request;
 
 class CommandeController extends Controller
@@ -21,8 +22,11 @@ class CommandeController extends Controller
      */
     public function index()
     {
-         $commande = Commande::with('produit')->paginate(10); return view('Admin.commandes.index',
-       compact('commande')) ->with('i', (request()->input('page', 1) - 1) * 4);
+        $commande = Commande::with('produit')->paginate(10);
+        return view(
+            'Admin.commandes.index',
+            compact('commande')
+        )->with('i', (request()->input('page', 1) - 1) * 4);
         return view('Admin.commandes.show');
     }
 
@@ -31,9 +35,9 @@ class CommandeController extends Controller
      */
     public function create()
     {
-        $produits= Produit::all();
-        $responsables=Responsable::all();
-        return view('Admin.commandes.create',compact('produits','responsables'));
+        $produits = Produit::all();
+        $pointVentes=PointVente::all();
+        return view('Admin.commandes.create', compact('produits', 'pointVentes'));
     }
     public function livrer($id)
     {
@@ -59,28 +63,36 @@ class CommandeController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([ 
-            'responsable_id' => 'required|exists:responsable,id',
+        
+        $request->validate([
             'produit_id' => 'required|exists:produit,id',
+            'source_point_vente_id' => 'required|exists:point_vente,id',
+            'destination_point_vente_id' => 'required|exists:point_vente,id',
             'quantite' => 'integer|min:1',
-    ]);
-        if (!$this->stockService->verifierDisponibilite($request->produit_id, $request->quantite)) {
-            return back()->withErrors(['message' => 'Stock insuffisant pour ce produit.']);
-        }
 
+        ]);
+        $stockSource = Stock::where('produit_id', $request->produit_id)
+            ->where('point_vente_id', $request->source_point_vente_id)
+            ->first();
+
+        if (!$stockSource || $stockSource->quantite < $request->quantite) {
+            return back()->withErrors('Quantité insuffisante dans le stock source.');
+        }
+    
         $commande = Commande::create([
-            'responsable_id' => $request->responsable_id,
-            'produit_id'=>$request->produit_id,
-            'quantite'=>$request->quantite,
+            'produit_id' => $request->produit_id,
+            'source_point_vente_id' => $request->point_vente_id,
+            'destination_point_vente_id' => $request->point_vente_id,
+            'quantite' => $request->quantite,
             'status' => 'En attente',
         ]);
 
-        foreach ($request->produits as $produit) {
-            $commande->produits()->attach($produit['id'], ['quantite' => $produit['quantite']]);
-        }
-        $this->stockService->diminuerStock($request->produit_id, $request->quantite);
 
-        return redirect()->route('Admin.commande.index')->with('success', 'Commande créée.');
+        $stockSource->decrement('quantite', $request->quantite);
+
+        return redirect()->route('Admin.commande.index')->with('success', 'Commande créée avec succès.');
+
+        
     }
 
     /**
@@ -89,7 +101,7 @@ class CommandeController extends Controller
     public function show($id)
     {
         $order = Commande::findOrFail($id);
-        return view('Admin.commandes.show',compact('commande'));
+        return view('Admin.commandes.show', compact('commande'));
     }
 
     /**
@@ -97,10 +109,10 @@ class CommandeController extends Controller
      */
     public function edit(Commande $commande)
     {
-        
-        $produits= Produit::all();
-        $responsables=Responsable::all();
-        return view('Admin.commandes.edit',compact('produits','responsables','commande'));
+
+        $produits = Produit::all();
+        $poinVentes = PointVente::all();
+        return view('Admin.commandes.edit', compact('produits', 'pointVentes', 'commande'));
     }
 
     /**
@@ -108,13 +120,14 @@ class CommandeController extends Controller
      */
     public function update(Request $request, Commande $commande)
     {
-        $request->validate([ 
-            'responsable_id' => 'required|exists:responsable,id',
+        $request->validate([
             'produit_id' => 'required|exists:produit,id',
+            'source_point_vente_id' => 'required|exists:point_vente,id',
+            'destination_point_vente_id' => 'required|exists:point_vente,id',
             'quantite' => 'integer|min:1',
         ]);
-        $commande->update($request->all()); 
-        return redirect()->route('Admin.commande.index') ->with('success','Commande mise à jour avec succès.');
+        $commande->update($request->all());
+        return redirect()->route('Admin.commande.index')->with('success', 'Commande mise à jour avec succès.');
     }
 
     /**
@@ -122,7 +135,7 @@ class CommandeController extends Controller
      */
     public function destroy(Commande $commande)
     {
-        $commande->delete(); 
-        return redirect()->route('Admin.commande.index') ->with('success','Commande supprimé avec succès');
+        $commande->delete();
+        return redirect()->route('Admin.commande.index')->with('success', 'Commande supprimé avec succès');
     }
 }

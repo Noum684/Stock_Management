@@ -4,7 +4,7 @@
         @csrf
            
             <x-primary-button class="ms-3">
-                {{ __('Log out') }}
+                {{ __('Se déconneter') }}
             </x-primary-button>
     </form>
 

@@ -40,7 +40,25 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'responsable' => [
+            'driver' => 'session',
+            'provider' => 'responsables',
+        ],
     ],
+
+    'providers' => [
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+        ],
+
+        'responsables' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Responsable::class,
+        ],
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -59,17 +77,17 @@ return [
     |
     */
 
-    'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\User::class,
-        ],
+    // 'providers' => [
+    //     'users' => [
+    //         'driver' => 'eloquent',
+    //         'model' => App\Models\User::class,
+    //     ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
-    ],
+    //     // 'users' => [
+    //     //     'driver' => 'database',
+    //     //     'table' => 'users',
+    //     // ],
+    // ],
 
     /*
     |--------------------------------------------------------------------------

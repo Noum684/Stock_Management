@@ -31,7 +31,7 @@
         <td>{{ $stocks->id }}</td>
         <td>{{ $stocks->produit->nom }}</td>
         <td>{{ $stocks->quantite }}</td>
-        <td>{{ $stocks->point_Vente->adresse }}</td>
+        <td>{{ $stocks->pointVente->adresse ?? 'Adresse non défini'}}</td>
         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
             <x-action-buttons 
                 :show="route('Admin.stock.show', $stocks->id)" 

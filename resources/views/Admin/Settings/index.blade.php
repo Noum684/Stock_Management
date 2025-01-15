@@ -2,7 +2,7 @@
 
 @section('content')
 <h2>Paramètres</h2>
-<form method="POST" action="{{ route('settings.update') }}">
+<form method="POST" action="{{ route('Admin.Settings.update') }}">
     @csrf
     @foreach($settings as $setting)
         <div class="form-group mb-3">

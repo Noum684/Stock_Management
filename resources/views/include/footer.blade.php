@@ -35,56 +35,94 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    const ctx = document.getElementById('commandeChart').getContext('2d');
-    const data = @json($commandeData); // Données envoyées depuis le contrôleur
+    
+    document.addEventListener("DOMContentLoaded", function () {
+        var ctx = document.getElementById('commandePieChart').getContext('2d');
 
-    const chart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: data.labels, // Labels des statuts
+        var data = {
+            
             datasets: [{
-                label: 'Répartition des commandes',
-                data: data.values, // Valeurs des commandes
+               
                 backgroundColor: [
-                    '#FF6384', // Couleur pour 'En attente'
-                    '#36A2EB', // Couleur pour 'Livrée'
-                    '#FFCE56', // Couleur pour 'Refusée'
-                    '#4BC0C0', // Ajoutez d'autres couleurs si nécessaire
+                    '#FF6384',
+                    '#36A2EB',
+                    '#FFCE56',
+                    '#4BC0C0',
+                    '#9966FF'
                 ],
-                borderColor: '#fff',
-                borderWidth: 1
+                hoverBackgroundColor: [
+                    '#FF6384',
+                    '#36A2EB',
+                    '#FFCE56',
+                    '#4BC0C0',
+                    '#9966FF'
+                ]
             }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    display: true,
-                    position: 'bottom',
-                    labels: {
-                        font: {
-                            size: 14
-                        },
-                        color: '#333'
-                    }
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            let label = context.label || '';
-                            let value = context.raw || 0;
-                            return `${label}: ${value} commandes`;
-                        }
-                    }
-                }
-            }
-        }
+        };
+
+        new Chart(ctx, {
+            type: 'pie',
+            data: data,
+        });
     });
-</script>
+    // Search script
+    document.querySelector('#search-bar').addEventListener('input', function (e) {
+    let query = e.target.value;
+
+    axios.get(`/search?query=${query}`)
+        .then(response => {
+            const resultsDropdown = document.querySelector('#search-results');
+            resultsDropdown.innerHTML = '';
+
+            response.data.forEach(result => {
+                const item = document.createElement('a');
+                item.classList.add('dropdown-item');
+                item.href = `/product/${result.id}`;
+                item.textContent = result.name;
+
+                resultsDropdown.appendChild(item);
+            });
+
+            if (query === '') {
+                resultsDropdown.innerHTML = '';
+            }
+        })
+        .catch(error => {
+            console.error(error);
+        });
+});
+//Message
+function fetchMessages() {
+    axios.get('/messages')
+        .then(response => {
+            const messageList = document.querySelector('#message-list');
+            const messageCount = document.querySelector('#message-count');
+            messageList.innerHTML = '';
+
+            response.data.forEach(message => {
+                const item = document.createElement('div');
+                item.classList.add('dropdown-item');
+                item.textContent = message.content;
+                item.addEventListener('click', () => markAsRead(message.id));
+
+                messageList.appendChild(item);
+            });
+
+            messageCount.textContent = response.data.length || '';
+        })
+        .catch(error => console.error(error));
+}
+
+function markAsRead(id) {
+    axios.post(`/messages/read/${id}`)
+        .then(() => fetchMessages())
+        .catch(error => console.error(error));
+}
+
+// Appel initial pour charger les messages.
+fetchMessages();
 
 
-    <script>
-    // Configuration du graphique
     const config = {
         type: 'pie',
         data: data,

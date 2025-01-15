@@ -11,7 +11,8 @@ class Commande extends Model
     protected $table="commande"; 
     public $primaryKey = 'id'; 
     public $incrementing = true; 
-    protected $fillable = [ 'id','produit_id','quantite','responsable_id', 'status'];
+    protected $fillable = [ 'id','produit_id','quantite','responsable_id', 'status','source_point_vente_id',
+        'destination_point_vente_id',];
 
     public function produit()
     {
@@ -21,6 +22,16 @@ class Commande extends Model
     public function responsable()
     {
         return $this->belongsTo(Responsable::class);
+    }
+
+    public function source()
+    {
+        return $this->belongsTo(PointVente::class, 'source_point_vente_id');
+    }
+
+    public function destination()
+    {
+        return $this->belongsTo(PointVente::class, 'destination_point_vente_id');
     }
 
     public function calculerTotalCommande($commandeId)

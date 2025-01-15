@@ -11,16 +11,6 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-
-    /**
-     * Show the profile
-     *
-     * @return \Illuminate\View\View
-     */
-    public function index()
-    {
-        return view('profile.index');
-    }
     /**
      * Display the user's profile form.
      */
@@ -65,6 +55,6 @@ class ProfileController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return Redirect::to('/')->with('success', 'Votre compte a été supprimé.');
+        return Redirect::to('/');
     }
 }

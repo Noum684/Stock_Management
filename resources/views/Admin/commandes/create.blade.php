@@ -36,7 +36,7 @@
                     <select name="produit_id" id="produit_id" class="form-select">
                         <option value="">-- Sélectionnez un produit --</option>
                         @foreach($produits as $produit)
-                            <option value="{{ $produit->produit_id }}" {{ old('produit_id') == $produit->produit_id ? 'selected' : '' }}>
+                            <option value="{{ $produit->id }}" {{ old('produit_id') == $produit->produit_id ? 'selected' : '' }}>
                                 {{ $produit->nom }}
                             </option>
                         @endforeach
@@ -52,15 +52,31 @@
         </div>
         
         <div class="col-12 mb-3">
-        <div class="form-group">
-            <label for="responsable_id">Responsable</label>
-            <select name="responsable_id" id="responsable_id" class="form-control">
-                @foreach($responsables as $responsable)
-                    <option value="{{ $responsable->id }}">{{ $responsable->nom }} {{ $responsable->prenom }}</option>
-                @endforeach
-            </select>
+            <div class="form-group">
+                <label for="source_point_vente_id">Entrepôt</label>
+                <select name="source_point_vente_id" id="source_point_vente_id" class="form-select" >
+                    <option value="">-- Sélectionnez un point de vente --</option>
+                    @foreach($pointVentes as $pointVent)
+                        <option value="{{ $pointVent->id }}" {{ old('pointVent_id')==$pointVent->pointVent_id?'selected':'' }}>
+                            {{$pointVent->adresse}}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
         </div>
-    </div>
+        <div class="col-12 mb-3">
+            <div class="form-group">
+                <label for="destination_point_vente_id">Point de vente</label>
+                <select name="destination_point_vente_id" id="destination_point_vente_id" class="form-select" >
+                    <option value="">-- Sélectionnez un point de vente --</option>
+                    @foreach($pointVentes as $pointVent)
+                        <option value="{{ $pointVent->id }}" {{ old('pointVent_id')==$pointVent->pointVent_id?'selected':'' }}>
+                            {{$pointVent->adresse}}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
     <div class="col-12 mb-3">
         <div class="form-group">
             <label for="status"><strong>Status:</strong></label>

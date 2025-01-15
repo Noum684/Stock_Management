@@ -2,24 +2,24 @@
 
 namespace App\Services;
 
-use App\Models\Produit;
+use App\Models\Stock;
 
 class ServiceStock
 {
     /**
      * Réduire le stock d'un produit.
      *
-     * @param int $produitId
+     * @param int $stockId
      * @param int $quantite
      * @return bool
      */
-    public function diminuerStock(int $produitId, int $quantite): bool
+    public function diminuerStock(int $stockId, int $quantite): bool
     {
-        $produit = Produit::find($produitId);
+        $stock = Stock::find($stockId);
 
-        if ($produit && $produit->quantite >= $quantite) {
-            $produit->quantite -= $quantite;
-            $produit->save();
+        if ($stock && $stock->quantite >= $quantite) {
+            $stock->quantite -= $quantite;
+            $stock->save();
             return true;
         }
 
@@ -33,13 +33,13 @@ class ServiceStock
      * @param int $quantite
      * @return bool
      */
-    public function augmenterStock(int $produitId, int $quantite): bool
+    public function augmenterStock(int $stockId, int $quantite): bool
     {
-        $produit = Produit::find($produitId);
+        $stock = Stock::find($stockId);
 
-        if ($produit) {
-            $produit->quantite += $quantite;
-            $produit->save();
+        if ($stock) {
+            $stock->quantite += $quantite;
+            $stock->save();
             return true;
         }
 
@@ -53,10 +53,10 @@ class ServiceStock
      * @param int $quantite
      * @return bool
      */
-    public function verifierDisponibilite(int $produitId, int $quantite): bool
+    public function verifierDisponibilite(int $stockId, int $quantite): bool
     {
-        $produit = Produit::find($produitId);
+        $stock = Stock::find($stockId);
 
-        return $produit && $produit->quantite >= $quantite;
+        return $stock && $stock->quantite >= $quantite;
     }
 }

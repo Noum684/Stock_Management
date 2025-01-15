@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\PointVente;
 use App\Models\Responsable;
+use App\Models\Stock;
+use App\Models\Transfert;
 use Illuminate\Http\Request;
 
 class PointVenteController extends Controller
@@ -13,7 +15,7 @@ class PointVenteController extends Controller
      */
     public function index()
     {
-        $pointVente = PointVente::latest()->paginate(4); return view('Admin.pointVentes.index',
+        $pointVente = PointVente::all()->paginate(4); return view('Admin.pointVentes.index',
         compact('pointVente')) ->with('i', (request()->input('page', 1) - 1) * 4);
     }
 
@@ -40,9 +42,45 @@ class PointVenteController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(PointVente $pointVente)
+    public function show($id)
     {
-        return view('Admin.pointVentes.show',compact('pointVente'));
+        $pointVente = PointVente::findOrFail($id);
+        $stocks = Stock::where('point_vente_id', $id)->get();
+        return view('Admin.pointVentes.show',compact('pointVente','stocks'));
+    }
+    public function transfert(Request $request)
+    {
+        $request->validate([
+            'produit_id' => 'required|exists:produits,id',
+            'point_vente_id' => 'required|exists:points_vente,id',
+            'quantite' => 'required|integer|min:1',
+        ]);
+        $stockEntrepot = Stock::where('produit_id', $request->produit_id)
+            ->whereNull('point_vente_id')
+            ->first();
+
+        if (!$stockEntrepot || $stockEntrepot->quantite < $request->quantite) {
+            return back()->withErrors('Stock insuffisant à l’entrepôt.');
+        }
+        $stockEntrepot->quantite -= $request->quantite;
+        $stockEntrepot->save();
+
+        // Ajouter au stock du point de vente
+        $stockPointVente = Stock::firstOrCreate(
+            ['produit_id' => $request->produit_id, 'point_vente_id' => $request->point_vente_id],
+            ['quantite' => 0]
+        );
+        $stockPointVente->quantite += $request->quantite;
+        $stockPointVente->save();
+        // Enregistrer le transfert
+        Transfert::create([
+            'produit_id' => $request->produit_id,
+            'point_vente_id' => $request->point_vente_id,
+            'quantite' => $request->quantite,
+            'statut' => 'approuvé',
+        ]);
+
+        return back()->with('success', 'Transfert effectué avec succès.');
     }
 
     /**

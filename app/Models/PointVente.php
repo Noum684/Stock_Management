@@ -18,4 +18,7 @@ class PointVente extends Model
     return $this->belongsTo(Responsable::class);
 }
 
+    public function stock(){
+        return $this->hasMany(Stock::class);
+    }
 }

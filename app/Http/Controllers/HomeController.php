@@ -26,10 +26,26 @@ class HomeController extends Controller
         $nombrePointVente=PointVente::count();
         // $ventesParPoint = Pointvente::withCount('produit')->orderBy('produits_count', 'desc')->take(5)->get();
         $nombreResponsable=Responsable::count();
+        $alerts=
+        $commandesParStatut = Commande::select('status', DB::raw('count(*) as total'))
+            ->groupBy('status')
+            ->pluck('total', 'status')
+            ->toArray();
+
+        // Séparer les statuts et les totaux pour Chart.js
+        $statuts = array_keys($commandesParStatut);
+        $totaux = array_values($commandesParStatut);
 
         $stocks = Stock::with('produit')->get(); // Affichage  des produits avec leur stock
 
-        return view('welcome', compact('nombreProduits', 'totalQuantiteStock', 'produitsAvecStock','stocksCritiques','stocksDisponible','totalCommandes','enAttente','livrees' ,'refusees','nombrePointVente','nombreResponsable','stocks'));
+        return view('welcome', compact('nombreProduits', 'totalQuantiteStock', 'produitsAvecStock','stocksCritiques','stocksDisponible','totalCommandes','enAttente','livrees' ,'refusees','nombrePointVente','nombreResponsable','stocks','alerts','statuts','totaux'));
+    }
+    public function export()
+    {
+        // Génération d'un rapport (CSV, PDF, etc.)
+        return response()->json([
+            'message' => 'Rapport exporté avec succès.',
+        ]);
     }
     
 }

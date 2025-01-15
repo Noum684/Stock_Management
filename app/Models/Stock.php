@@ -27,6 +27,10 @@ class Stock extends Model
     {
         return $this->belongsTo(Responsable::class);
     }
+     public function pointVente()
+     {
+        return $this->belongsTo(PointVente::class);
+     }
     
 
 
