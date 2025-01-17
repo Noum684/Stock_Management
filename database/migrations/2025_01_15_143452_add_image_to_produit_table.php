@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('point_vente', function (Blueprint $table) {
-            $table->id();
-            $table->string('nom');
-            $table->string('adresse')->nullable(); 
-            $table->timestamps();
-
-            
+        Schema::table('produit', function (Blueprint $table) {
+            $table->string('image')->nullable();
         });
     }
 
@@ -26,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('point_vente');
+        Schema::table('produit', function (Blueprint $table) {
+            //
+        });
     }
 };

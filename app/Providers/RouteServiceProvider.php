@@ -1,8 +1,11 @@
-<?php
+<?php 
 
-return [
-    App\Providers\AppServiceProvider::class,
-];
+
+
+
+
+
+
 // protected function mapWebRoutes()
 // {
 //     Route::middleware('web')

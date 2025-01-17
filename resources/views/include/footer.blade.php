@@ -35,6 +35,12 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
+
+window.Echo.channel('stock-channel')
+    .listen('.stock.updated', (data) => {
+        alert(`Le stock du produit ${data.produit} a été mis à jour. Quantité : ${data.quantite}`);
+    });
+
     
     document.addEventListener("DOMContentLoaded", function () {
         var ctx = document.getElementById('commandePieChart').getContext('2d');
@@ -67,30 +73,30 @@
     });
     // Search script
     document.querySelector('#search-bar').addEventListener('input', function (e) {
-    let query = e.target.value;
+        let query = e.target.value;
 
-    axios.get(`/search?query=${query}`)
-        .then(response => {
-            const resultsDropdown = document.querySelector('#search-results');
-            resultsDropdown.innerHTML = '';
-
-            response.data.forEach(result => {
-                const item = document.createElement('a');
-                item.classList.add('dropdown-item');
-                item.href = `/product/${result.id}`;
-                item.textContent = result.name;
-
-                resultsDropdown.appendChild(item);
-            });
-
-            if (query === '') {
+        axios.get(`/search?query=${query}`)
+            .then(response => {
+                const resultsDropdown = document.querySelector('#search-results');
                 resultsDropdown.innerHTML = '';
-            }
-        })
-        .catch(error => {
-            console.error(error);
-        });
-});
+
+                response.data.forEach(result => {
+                    const item = document.createElement('a');
+                    item.classList.add('dropdown-item');
+                    item.href = `/produit/${result.id}`;
+                    item.textContent = result.name;
+
+                    resultsDropdown.appendChild(item);
+                });
+
+                if (query === '') {
+                    resultsDropdown.innerHTML = '';
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    });
 //Message
 function fetchMessages() {
     axios.get('/messages')

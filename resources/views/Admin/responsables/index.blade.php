@@ -25,6 +25,7 @@
         <th>Nom</th>
         <th>Email</th>
         <th>Téléphone</th>
+        <th>Localisation</th>
         <th width="280px">Action</th>
     </tr>
     @foreach ($responsable as $respons)
@@ -34,6 +35,7 @@
         <td>{{ $respons->nom }}</td>
         <td>{{ $respons->email}}</td>
         <td>{{ $respons->telephone}}</td>
+        <td>{{ $stocks->pointVente->adresse ?? 'Adresse non défini'}}</td>
         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
             <x-action-buttons 
                 :show="route('Admin.responsable.show', $respons->id)" 

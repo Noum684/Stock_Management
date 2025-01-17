@@ -39,8 +39,18 @@ class ProduitController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(['nom' => 'required',  'categorie_id' => 'required|exists:categorie,id','description' => 'required','prix' => 'required',]);
-        Produit::create($request->all()); 
+        $validated=$request->validate([
+            'nom' => 'required',  
+            'categorie_id' => 'required|exists:categorie,id',
+            'description' => 'required',
+            'prix' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        if ($request->hasFile('image')) {
+            $validated['image'] = $request->file('image')->store('images', 'public');
+        }
+        Produit::create($validated); 
         return redirect()->route('Admin.produit.index') ->with('success','Produit créé avec succès.');
     }
 
@@ -67,9 +77,20 @@ class ProduitController extends Controller
      */
     public function update(Request $request, Produit $produit)
     {
-        $request->validate(['nom' => 'required',  'categorie_id' => 'required|exists:categorie,id','description' => 'required','prix' => 'required',]);
-        $produit->update($request->all()); 
-        return redirect()->route('Admin.produit.index') ->with('success','Produit mis à jour avec succès.');
+        $validated=$request->validate([
+            'nom' => 'required',  
+            'categorie_id' => 'required|exists:categorie,id',
+            'description' => 'required',
+            'prix' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        if ($request->hasFile('image')) {
+            $validated['image'] = $request->file('image')->store('images', 'public');
+        }
+        Produit::create($validated); 
+        return redirect()->route('Admin.produit.index') ->with('success','Produit créé avec succès.');
+        
     }
 
     /**

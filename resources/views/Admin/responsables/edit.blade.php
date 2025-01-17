@@ -39,6 +39,19 @@
         <div class="form-group"> 
             <strong>Télephone:</strong> <input type="text" name="telephone" value="{{ $responsable->telephone}}" class="form-control" placeholder="Saisir le numero de telephone"> 
         </div> 
+    </div>
+    <div class="col-12 mb-3">
+        <div class="form-group">
+            <label for="point_vente_id">Localisation</label>
+            <select name="point_vente_id" id="point_vente_id" class="form-select" >
+                <option value="">-- Sélectionnez un point de vente --</option>
+                @foreach($pointVentes as $pointVent)
+                    <option value="{{ $pointVent->id }}" {{ old('pointVent_id')==$pointVent->pointVent_id?'selected':'' }}>
+                        {{$pointVent->adresse}}
+                    </option>
+                @endforeach
+            </select>
+        </div>
     </div> 
 </div>
 <div class="row"> 

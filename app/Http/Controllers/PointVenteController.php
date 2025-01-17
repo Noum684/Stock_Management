@@ -6,6 +6,7 @@ use App\Models\PointVente;
 use App\Models\Responsable;
 use App\Models\Stock;
 use App\Models\Transfert;
+use App\Jobs\ProcessTransfer;
 use Illuminate\Http\Request;
 
 class PointVenteController extends Controller
@@ -24,8 +25,7 @@ class PointVenteController extends Controller
      */
     public function create()
     {
-        $responsables = Responsable::all(); 
-        return view('Admin.pointVentes.create', compact('responsables')); 
+        return view('Admin.pointVentes.create',); 
         
     }
 
@@ -34,7 +34,7 @@ class PointVenteController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([ 'nom' => 'required', 'adresse' => 'required', 'responsable_id' => 'required|exists:responsable,id', ]);
+        $request->validate([ 'nom' => 'required', 'adresse' => 'required', ]);
         PointVente::create($request->all()); 
         return redirect()->route('Admin.pointVente.index') ->with('success','Point de vente créé avec succès.');
     }
@@ -72,6 +72,11 @@ class PointVenteController extends Controller
         );
         $stockPointVente->quantite += $request->quantite;
         $stockPointVente->save();
+        // event(new StockUpdated($produit->nom, $stock->quantite));
+        
+
+        // ProcessTransfer::dispatch($produit, $quantite, $pointVenteId);
+
         // Enregistrer le transfert
         Transfert::create([
             'produit_id' => $request->produit_id,
@@ -86,10 +91,10 @@ class PointVenteController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(PointVente $pointVente)
+    public function edit(PointVente $pointVente)  
     {
-        $responsables = Responsable::all(); 
-        return view('Admin.pointVentes.edit', compact('responsables','pointVente')); 
+        
+        return view('Admin.pointVentes.edit', compact('pointVente')); 
     }
 
     /**
@@ -97,7 +102,7 @@ class PointVenteController extends Controller
      */
     public function update(Request $request, PointVente $pointVente)
     {
-        $request->validate([ 'nom' => 'required', 'adresse' => 'required', 'responsable_id' => 'required|exists:responsable,id', ]); 
+        $request->validate([ 'nom' => 'required', 'adresse' => 'required', ]); 
         $pointVente->update($request->all()); 
         return redirect()->route('Admin.pointVente.index') ->with('success','Point de vente mis à jour avec succès.');
     }

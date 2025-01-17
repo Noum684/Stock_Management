@@ -31,7 +31,18 @@
             <strong>Adresse:</strong> <input type="text" name="adresse" value="{{ $pointVente->adresse}}" class="form-control" placeholder="Saisir l'adresse'"> 
         </div> 
     </div> 
-   
+    <div class="col-12 mb-3">
+        <div class="form-group">
+            <strong>Responsable:</strong>
+            <select name="categorie_id" class="form-control">
+                @foreach($responsables as $responsable)
+                    <option value="{{ $responsable->responsable_id }}" {{ $pointVente->responsable_id == $responsable->responsable_id ? 'selected' : '' }}>
+                        {{ $responsable->nom }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+    </div>
 </div>
 <div class="row "> 
     <div class="col-12 "> 

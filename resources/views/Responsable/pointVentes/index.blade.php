@@ -21,6 +21,7 @@
         <th>Numéro</th>
         <th>Nom</th>
         <th>Adresse</th>
+        <th>Responsable</th>
         <th width="280px">Action</th>
     </tr>
     @foreach ($pointVente as $pointVent)
@@ -28,6 +29,7 @@
         <td>{{ $pointVent->id }}</td>
         <td>{{ $pointVent->nom }}</td>
         <td>{{ $pointVent->adresse }}</td>
+        <td>{{ $pointVent->responsable->nom }}</td>
         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
             <x-action-buttons 
                 :show="route('Admin.commande.show', $pointVent->id)" 

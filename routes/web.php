@@ -1,53 +1,67 @@
 <?php
 
-
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\StockController;
-use App\Http\Controllers\CategorieController;
-use App\Http\Controllers\CommandeController;
-use App\Http\Controllers\ResponsableController;
-use App\Http\Controllers\PointVenteController;
-use App\Http\Controllers\ProduitController;
-use App\Http\Controllers\SettingController;
-use App\Http\Controllers\ActivityController;
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\StatistiqueController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\SearchController;
-use App\Http\Controllers\MessageController;
-use App\Http\Controllers\AlertController;
+use App\Http\Controllers\{
+    ProfileController,
+    StockController,
+    CategorieController,
+    CommandeController,
+    ResponsableController,
+    PointVenteController,
+    ProduitController,
+    SettingController,
+    ActivityController,
+    RoleController,
+    StatistiqueController,
+    HomeController,
+    SearchController,
+    MessageController,
+    AlertController
+};
 
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
-
-
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
 
 
 Route::middleware(['auth', 'verified'])->group(function () {
+    // Routes pour l'administrateur
+    Route::middleware(['role:admin'])->group(function () {
+        // Gestion des stocks
+        Route::get('/Admin/stocks', [StockController::class, 'index'])->name('Admin.stock.index');
+        Route::get('/Admin/stocks/create', [StockController::class, 'create'])->name('Admin.stock.create');
+        Route::post('/Admin/stocks/store', [StockController::class, 'store'])->name('Admin.stock.store');
+        Route::get('/Admin/stocks/{id}/edit', [StockController::class, 'edit'])->name('Admin.stock.edit');
+        Route::put('/Admin/stocks/update', [StockController::class, 'update'])->name('Admin.stock.update');
+        Route::delete('/Admin/stocks/destroy', [StockController::class, 'destroy'])->name('Admin.stock.destroy');
 
-    // // Accueil
-    // Route::get('/', function () {
-    //     return view('welcome');
-    // })->name('welcome');
-    // Route::get('/', [HomeController::class, 'index']);
-    Route::get('/', [HomeController::class, 'index'])->name('welcome');
-    Route::get('/Admin/responsable/dashboard', [ResponsableController::class, 'index'])->name('Admin.responsable.dashboard');
+        // Gestion des responsables
+        Route::get('/Admin/responsable', [ResponsableController::class, 'index'])->name('Admin.responsable.index');
+        Route::get('/Admin/responsable/create', [ResponsableController::class, 'create'])->name('Admin.responsable.create');
+        Route::post('/Admin/responsable/store', [ResponsableController::class, 'store'])->name('Admin.responsable.store');
+        Route::get('/Admin/responsable/{id}/edit', [ResponsableController::class, 'edit'])->name('Admin.responsable.edit');
+        Route::put('/Admin/responsable/update', [ResponsableController::class, 'update'])->name('Admin.responsable.update');
+        Route::delete('/Admin/responsable/destroy', [ResponsableController::class, 'destroy'])->name('Admin.responsable.destroy');
 
+        // Statistiques et commandes globales
+        Route::get('/Admin/commandes', [CommandeController::class, 'index'])->name('Admin.commandes.index');
+        Route::get('/Admin/statistiques', [StatistiqueController::class, 'index'])->name('Admin.statistiques.index');
+    });
 
-    // Gestion des responsables
+    // Routes pour le responsable
+    Route::middleware(['role:responsable'])->group(function () {
+        // Gestion de son point de vente
+        Route::get('/Responsable/stocks', [StockController::class, 'viewOwnStock'])->name('Responsable.stock.index');
+
+        // Commandes et statistiques liées au point de vente
+        Route::get('/Responsable/commandes', [CommandeController::class, 'create'])->name('Responsable.commandes.create');
+        Route::get('/Responsable/statistiques', [StatistiqueController::class, 'viewOwnStats'])->name('Responsable.statistiques.index');
+    });
+
     
-    Route::get('/Admin/responsable', [ResponsableController::class,'index'])->name('Admin.responsable.index');
-    Route::get('/Admin/responsable/create', [ResponsableController::class,'create'])->name('Admin.responsable.create');
-    Route::get('/Admin/responsable/edit', [ResponsableController::class,'edit'])->name('Admin.responsable.edit');
-    Route::post('/Admin/responsable/update', [ResponsableController::class,'update'])->name('Admin.responsable.update');
-    Route::post('/Admin/responsable/store', [ResponsableController::class,'store'])->name('Admin.responsable.store');
-    Route::get('/Admin/responsable/destroy', [ResponsableController::class,'destroy'])->name('Admin.responsable.destroy');
-    Route::get('/Admin/responsable/show', [ResponsableController::class,'show'])->name('Admin.responsable.show');
-
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // Gestion des points de vente
     Route::get('/Admin/pointVente', [PointVenteController::class, 'index'])->name(('Admin.pointVente.index'));
@@ -104,6 +118,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/', [HomeController::class, 'index'])->name('welcome');
+    Route::get('/Admin/responsable/dashboard', [ResponsableController::class, 'index'])->name('Admin.responsable.dashboard');
  
 
     // Gestion des activités

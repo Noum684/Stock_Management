@@ -11,11 +11,11 @@ class PointVente extends Model
     protected $table = "point_vente";
     public $primaryKey = 'id';
     public $incrementing = true;
-    protected $fillable = ['id', 'nom', 'adresse', 'responsable_id'];
+    protected $fillable = ['id', 'nom', 'adresse',];
 
     public function responsable()
 {
-    return $this->belongsTo(Responsable::class);
+    return $this->hasOne(Responsable::class);
 }
 
     public function stock(){

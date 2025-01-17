@@ -17,7 +17,10 @@ return new class extends Migration
             $table->string('nom');
             $table->string('email');
             $table->string('telephone');
+            
+            $table->unsignedBigInteger('point_vente_id');
             $table->timestamps();
+            $table->foreign('point_vente_id')->references('id')->on('point_vente')->onDelete('cascade');
         });
     }
 

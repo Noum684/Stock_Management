@@ -5,10 +5,10 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="float-start">
-            <h2>Ajouter</h2>
+            <h2>Ajouter une commande</h2>
         </div>
         <div class="float-end">
-            <a class="btn btn-outline-primary" href="{{ route('Admin.stock.index') }}">Retour</a>
+            <a class="btn btn-outline-primary" href="{{ route('Admin.commande.index') }}">Retour</a>
         </div>
     </div>
 </div>
@@ -24,10 +24,9 @@
     </div>
 @endif
 
-<form action="{{ route('Admin.stock.store') }}" method="POST">
+<form action="{{ route('Admin.commande.store') }}" method="POST">
     @csrf
     <div class="row mb-3">
-        
         <div class="col-12 mb-3">
             <div class="form-group">
                 <label for="produit_id"><strong>Nom du produit:</strong></label>
@@ -47,14 +46,28 @@
         </div>
         <div class="col-12 mb-3">
             <div class="form-group">
-                <strong>Quantité disponible:</strong>
-                <input type="number" name="quantite" class="form-control" placeholder="Saisir la quantite">
+                <strong>Quantité commandée:</strong>
+                <input type="number" name="quantite" class="form-control" placeholder="Saisir la quantite de la commande">
+            </div>
+        </div>
+        
+        <div class="col-12 mb-3">
+            <div class="form-group">
+                <label for="source_point_vente_id">Entrepôt</label>
+                <select name="source_point_vente_id" id="source_point_vente_id" class="form-select" >
+                    <option value="">-- Sélectionnez un point de vente --</option>
+                    @foreach($pointVentes as $pointVent)
+                        <option value="{{ $pointVent->id }}" {{ old('pointVent_id')==$pointVent->pointVent_id?'selected':'' }}>
+                            {{$pointVent->adresse}}
+                        </option>
+                    @endforeach
+                </select>
             </div>
         </div>
         <div class="col-12 mb-3">
             <div class="form-group">
-                <label for="point_vente_id">Localisation</label>
-                <select name="point_vente_id" id="point_vente_id" class="form-select" >
+                <label for="destination_point_vente_id">Point de vente</label>
+                <select name="destination_point_vente_id" id="destination_point_vente_id" class="form-select" >
                     <option value="">-- Sélectionnez un point de vente --</option>
                     @foreach($pointVentes as $pointVent)
                         <option value="{{ $pointVent->id }}" {{ old('pointVent_id')==$pointVent->pointVent_id?'selected':'' }}>
@@ -66,17 +79,20 @@
         </div>
     <div class="col-12 mb-3">
         <div class="form-group">
-            <strong>Seuil:</strong>
-            <input type="number" name="seuil_m" class="form-control" placeholder="Saisir la quantite">
+            <label for="status"><strong>Status:</strong></label>
+            <select name="status" id="status" class="form-control">
+                <option value="En attente" {{ old('status') == 'En attente' ? 'selected' : '' }}>En attente</option>
+                <option value="Refusée" {{ old('status') == 'Refusée' ? 'selected' : '' }}>Refusée</option>
+                <option value="Livrée" {{ old('status') == 'Livrée' ? 'selected' : '' }}>Livrée</option>
+            </select>
         </div>
     </div>
-
+    </div>
+    
     <div class="row">
-        <div class="col-12 ">
-            <button type="submit" class="btn btn-primary">Enregistrer</button>
-        </div>
+            <div class="col-12  ">
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+            </div>
     </div>
-
- </div>
 </form>
 @endsection

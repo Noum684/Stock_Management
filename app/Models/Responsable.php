@@ -11,10 +11,11 @@ class Responsable extends Model
     protected $table="responsable"; 
     public $primaryKey = 'id'; 
     public $incrementing = true; 
-    protected $fillable = [ 'id', 'prenom','nom','email','telephone'];
+    protected $fillable = [ 'id', 'prenom','nom','email','telephone','password','point_vente_id'];
 
-    public function pointVentes()
-{
-    return $this->hasMany(PointVente::class);
-}
+
+    public function pointVente()
+     {
+        return $this->belongsTo(PointVente::class);
+     }
 }

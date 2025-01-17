@@ -44,7 +44,6 @@
                     </select>
                 @endif
             </div>
-        </div>
         <div class="col-12 mb-3">
             <div class="form-group">
                 <strong>Quantité disponible:</strong>
@@ -64,6 +63,7 @@
                 </select>
             </div>
         </div>
+    </div>
     <div class="col-12 mb-3">
         <div class="form-group">
             <strong>Seuil:</strong>
@@ -76,7 +76,5 @@
             <button type="submit" class="btn btn-primary">Enregistrer</button>
         </div>
     </div>
-
- </div>
 </form>
 @endsection
