@@ -14,12 +14,11 @@ class ResponsableMiddleware
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle($request, Closure $next)
     {
-        if (Auth::guard('responsable')->check()) {
-            return $next($request);
+        if (!Auth::guard('responsable')->check()) {
+            return redirect()->route('login');
         }
-
-        return redirect('/responsable/login');
+        return $next($request);
     }
 }

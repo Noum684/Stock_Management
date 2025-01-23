@@ -35,29 +35,7 @@ return [
     |
     */
 
-    'guards' => [
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
-        ],
-
-        'responsable' => [
-            'driver' => 'session',
-            'provider' => 'responsables',
-        ],
-    ],
-
-    'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\User::class,
-        ],
-
-        'responsables' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Responsable::class,
-        ],
-    ],
+  
 
 
     /*
@@ -107,15 +85,56 @@ return [
     | quickly generating a very large amount of password reset tokens.
     |
     */
-
-    'passwords' => [
-        'users' => [
-            'provider' => 'users',
-            'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
-            'expire' => 60,
-            'throttle' => 60,
-        ],
+    'guards' => [
+    'web' => [
+        'driver' => 'session',
+        'provider' => 'users',
     ],
+
+    'admin' => [
+        'driver' => 'session',
+        'provider' => 'admins',
+    ],
+
+    'responsable' => [
+        'driver' => 'session',
+        'provider' => 'responsables',
+    ],
+],
+
+'providers' => [
+    'users' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\User::class,
+    ],
+
+    'admins' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\User::class,  // Administrateurs
+    ],
+
+    'responsables' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Responsable::class,  // Responsables
+    ],
+],
+
+'passwords' => [
+    'users' => [
+        'provider' => 'users',
+        'table' => 'password_resets',
+        'expire' => 60,
+        'throttle' => 60,
+    ],
+    'responsables' => [
+        'provider' => 'responsables',
+        'table' => 'password_resets',
+        'expire' => 60,
+        'throttle' => 60,
+    ],
+],
+
+
 
     /*
     |--------------------------------------------------------------------------

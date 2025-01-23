@@ -14,12 +14,11 @@ class UserMiddleware
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle($request, Closure $next)
     {
-      if (Auth::guard('web')->check()) {
-            return $next($request);
+        if (!Auth::guard('user')->check()) {
+            return redirect()->route('login');
         }
-
-        return redirect('/login');
+        return $next($request);
     }
 }

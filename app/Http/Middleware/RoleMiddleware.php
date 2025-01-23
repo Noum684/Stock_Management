@@ -16,16 +16,12 @@ class RoleMiddleware
      */
     public function handle(Request $request, Closure $next, $role)
     {
-        $user = Auth::user();
+        $guard = $role === 'admin' ? 'admin' : 'responsable';
 
-        if ($role === 'admin' && $user instanceof \App\Models\User) {
-            return $next($request);
+        if (!Auth::guard($guard)->check()) {
+            return redirect()->route('login')->withErrors(['access' => 'Unauthorized access']);
         }
 
-        if ($role === 'responsable' && $user instanceof \App\Models\Responsable) {
-            return $next($request);
-        }
-
-        abort(403, 'Unauthorized action.');
+        return $next($request);
     }
 }

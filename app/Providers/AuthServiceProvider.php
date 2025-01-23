@@ -3,29 +3,21 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use App\Models\User;
+use App\Models\Responsable;
 
 class AuthServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        // Vérifier si un utilisateur est admin
-        Gate::define('isAdmin', function ($user) {
-            return $user instanceof \App\Models\User;
-        });
+        $this->registerPolicies();
 
-        // Vérifier si un utilisateur est responsable
-        Gate::define('isResponsable', function ($user) {
-            return $user instanceof \App\Models\Responsable;
-        });
+    Gate::define('view-admin-dashboard', function ($user) {
+        return $user instanceof User;
+    });
 
-        // Permettre à l'admin d'accéder à tout
-        Gate::define('accessAllStocks', function ($user) {
-            return $user instanceof \App\Models\User;
-        });
-
-        // Permettre au responsable d'accéder uniquement à son point de vente
-        Gate::define('accessOwnStock', function ($user, $pointVenteId) {
-            return $user instanceof \App\Models\Responsable && $user->point_vente_id == $pointVenteId;
-        });
+    Gate::define('view-responsable-dashboard', function ($user) {
+        return $user instanceof Responsable;
+    });
     }
 }

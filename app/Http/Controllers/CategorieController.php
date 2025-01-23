@@ -37,7 +37,7 @@ class CategorieController extends Controller
         Categorie::create($request->all());
     
         // Redirection avec succès
-        return redirect()->route('Admin.categorie.index')
+        return redirect()->route('categorie.index')
                          ->with('success', 'Catégorie créée avec succès.');
     }
 
@@ -67,7 +67,7 @@ class CategorieController extends Controller
             'description' => 'required|string|max:1000',
         ]); 
         $categorie->update($request->all()); 
-        return redirect()->route('Admin.categorie.index') ->with('success','Categorie mise à jour avec succès.');
+        return redirect()->route('categorie.index') ->with('success','Categorie mise à jour avec succès.');
     }
 
     /**
@@ -76,6 +76,6 @@ class CategorieController extends Controller
     public function destroy(Categorie $categorie)
     {
         $categorie->delete(); 
-        return redirect()->route('Admin.categorie.index') ->with('success','Categorie supprimé avec succès');
+        return redirect()->route('categorie.index') ->with('success','Categorie supprimé avec succès');
     }
 }

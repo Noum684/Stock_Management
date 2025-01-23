@@ -15,8 +15,10 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
     }
     protected $routeMiddleware = [
-        'role' => \App\Http\Middleware\RoleMiddleware::class,
+        'auth.user' => \App\Http\Middleware\UserMiddleware::class,
+        'auth.responsable' => \App\Http\Middleware\ResponsableMiddleware::class,
     ];
+    
     
 
     /**

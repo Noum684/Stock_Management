@@ -18,7 +18,20 @@ return [
     |
     */
 
+        
+
     'driver' => env('SESSION_DRIVER', 'database'),
+
+    'defaults' => 'user_sessions',
+
+    'connections' => [
+        'user_sessions' => [
+            'driver' => 'database',
+            'table' => 'sessions',
+            'lifetime' => 120,
+            'expire_on_close' => false,
+        ],
+    ],
 
     /*
     |--------------------------------------------------------------------------

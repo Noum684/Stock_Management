@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Commande;
 use App\Models\PointVente;
 use App\Services\ServiceStock;
+use App\Notifications\CommandeStatusNotification;
 use App\Models\Produit;
 use App\Models\Stock;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class CommandeController extends Controller
 {
@@ -127,6 +130,7 @@ class CommandeController extends Controller
             'quantite' => 'integer|min:1',
         ]);
         $commande->update($request->all());
+        $commande->responsable->notify(new CommandeStatusNotification($commande));
         return redirect()->route('Admin.commande.index')->with('success', 'Commande mise à jour avec succès.');
     }
 
@@ -137,5 +141,14 @@ class CommandeController extends Controller
     {
         $commande->delete();
         return redirect()->route('Admin.commande.index')->with('success', 'Commande supprimé avec succès');
+    }
+    public function stats() {
+        $totalCommandes = Commande::count();
+        $commandesParProduit = Commande::select('produit_id', DB::raw('count(*) as total'))
+            ->groupBy('produit_id')
+            ->with('produit')
+            ->get();
+    
+        return view('admin.stats', compact('totalCommandes', 'commandesParProduit'));
     }
 }

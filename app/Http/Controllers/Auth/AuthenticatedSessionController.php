@@ -3,65 +3,29 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\View\View;
 
-class AuthenticatedSessionController extends Controller
+class AuthenticateSessionController extends Controller
 {
     /**
-     * Display the login view.
+     * Forcer la déconnexion d'autres sessions actives
      */
-    public function create(): View
+    public function destroyOtherSessions(Request $request)
     {
-        return view('auth.login');
-    }
+        $user = Auth::user();
+
+        Auth::logoutOtherDevices($request->password);
+
+        return redirect()->route('dashboard')->with('success', 'Autres sessions déconnectées.');
+    } 
 
     /**
-     * Handle an incoming authentication request.
+     * Rafraîchir la session utilisateur
      */
-    public function store(LoginRequest $request): RedirectResponse
+    public function refreshSession(Request $request)
     {
-        $credentials = $request->validate([
-        'email' => ['required', 'email'],
-        'password' => ['required'],
-    ]);
-
-
-    return back()->withErrors([
-        'email' => 'Les informations fournies sont incorrectes.',
-    ]);
-    }
-    public function login(Request $request)
-{
-    $credentials = $request->only('email', 'password');
-    $role = $request->role;
-
-    if ($role === 'admin' && Auth::guard('admin')->attempt($credentials)) {
-        return redirect()->route('admin.stocks');
-    }
-
-    if ($role === 'responsable' && Auth::guard('responsable')->attempt($credentials)) {
-        return redirect()->route('responsable.stocks');
-    }
-
-    return back()->withErrors(['email' => 'Invalid credentials or role.']);
-}
-
-
-    /**
-     * Destroy an authenticated session.
-     */
-    public function destroy(Request $request): RedirectResponse
-    {
-        Auth::guard('web')->logout();
-
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
-
-        return redirect('/');
+        $request->session()->regenerate();
+        return back()->with('success', 'Session actualisée.');
     }
 }
