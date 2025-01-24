@@ -91,9 +91,9 @@ return [
         'provider' => 'users',
     ],
 
-    'admin' => [
+    'user' => [
         'driver' => 'session',
-        'provider' => 'admins',
+        'provider' => 'users',
     ],
 
     'responsable' => [
@@ -108,7 +108,7 @@ return [
         'model' => App\Models\User::class,
     ],
 
-    'admins' => [
+    'users' => [
         'driver' => 'eloquent',
         'model' => App\Models\User::class,  // Administrateurs
     ],
@@ -121,7 +121,7 @@ return [
 
 'passwords' => [
     'users' => [
-        'provider' => 'users',
+        'provider' => 'admins',
         'table' => 'password_resets',
         'expire' => 60,
         'throttle' => 60,

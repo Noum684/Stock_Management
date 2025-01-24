@@ -3,29 +3,45 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\LoginRequest;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
-class AuthenticateSessionController extends Controller
+class AuthenticatedSessionController extends Controller
 {
     /**
-     * Forcer la déconnexion d'autres sessions actives
+     * Display the login view.
      */
-    public function destroyOtherSessions(Request $request)
+    public function create(): View
     {
-        $user = Auth::user();
-
-        Auth::logoutOtherDevices($request->password);
-
-        return redirect()->route('dashboard')->with('success', 'Autres sessions déconnectées.');
-    } 
+        return view('auth.login');
+    }
 
     /**
-     * Rafraîchir la session utilisateur
+     * Handle an incoming authentication request.
      */
-    public function refreshSession(Request $request)
+    public function store(LoginRequest $request): RedirectResponse
     {
+        $request->authenticate();
+
         $request->session()->regenerate();
-        return back()->with('success', 'Session actualisée.');
+
+        return redirect()->intended(route('welcome', absolute: false));
+    }
+
+    /**
+     * Destroy an authenticated session.
+     */
+    public function destroy(Request $request): RedirectResponse
+    {
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/');
     }
 }

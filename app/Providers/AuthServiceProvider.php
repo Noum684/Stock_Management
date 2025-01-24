@@ -12,11 +12,11 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-    Gate::define('view-admin-dashboard', function ($user) {
+    Gate::define('view-welcome', function ($user) {
         return $user instanceof User;
     });
 
-    Gate::define('view-responsable-dashboard', function ($user) {
+    Gate::define('view-dashboards', function ($user) {
         return $user instanceof Responsable;
     });
     }

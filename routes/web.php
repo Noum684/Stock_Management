@@ -11,15 +11,19 @@ use App\Http\Controllers\{
     ProduitController,
     SettingController,
     ActivityController,
-    RoleController,
+    // RoleController,
     StatistiqueController,
     HomeController,
     SearchController,
     MessageController,
-    AlertController
+    AlertController,
 };
 
-Route::get('/dashboard', function () {
+// use App\Http\Controllers\DashboardController;
+
+// Route::get('/', [DashboardController::class, 'index'])->name('home');
+
+Route::get('/', function () {
     return view('dashboard');
 })->name('dashboard');
 
@@ -27,6 +31,8 @@ Route::get('/dashboard', function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     // Routes pour l'administrateur
     Route::middleware(['auth:user'])->group(function () {
+
+        Route:: get('/welcome',[HomeController::class,'index'])->name('welcome');
         // Gestion des stocks
         Route::get('/Admin/stock', [StockController::class, 'index'])->name('Admin.stock.index');
         Route::get('/Admin/stock/create', [StockController::class, 'create'])->name('Admin.stock.create');
@@ -44,7 +50,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::put('/Admin/responsable/update', [ResponsableController::class, 'update'])->name('Admin.responsable.update');
         Route::delete('/Admin/responsable/destroy', [ResponsableController::class, 'destroy'])->name('Admin.responsable.destroy');
 
-            // Gestion des points de vente
+        // Gestion des points de vente
         Route::get('/Admin/pointVente', [PointVenteController::class, 'index'])->name(('Admin.pointVente.index'));
         Route::get('/Admin/pointVente/ create', [PointVenteController::class, 'create'])->name(('Admin.pointVente.create'));
         Route::get('/Admin/pointVente/edit', [PointVenteController::class, 'edit'])->name(('Admin.pointVente.edit'));
@@ -76,7 +82,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/Admin/commandes', [CommandeController::class, 'index'])->name('Admin.commande.index');
         Route::get('/Admin/statistiques', [StatistiqueController::class, 'index'])->name('Admin.statistiques.index');
 
-        Route::get('/Admin/profile', [ProfileController::class, 'userProfile'])->name('Admin.profile');
+        Route::get('/Admin/profile', [ProfileController::class, 'edit'])->name('profile.edit');
 
          // Gestion des activités
         Route::get('/Admin/Activitys', [ActivityController::class, 'index'])->name('Admin.activitys.index');
@@ -98,13 +104,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/messages', [MessageController::class, 'fetchMessages'])->name('messages.fetch');
         Route::post('/messages/read/{id}', [MessageController::class, 'markAsRead'])->name('messages.read');
 
+        
+
         //Notifications
         Route::get('/alerts', [AlertController::class, 'showAlerts'])->name('alerts.index');
     });
     
 
-    // Routes pour le responsable
-    Route::middleware(['auth:responsable'])->group(function () {
+        // Routes pour le responsable
+        Route::middleware(['auth:responsable'])->group(function () {
+        
+            Route:: get('/welcome',[HomeController::class,'index'])->name('welcome');
         // Gestion de son point de vente
         Route::get('/Responsable/stocks', [StockController::class, 'viewOwnStock'])->name('Responsable.stock.index');
         
@@ -125,23 +135,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/responsable/profile', [ProfileController::class, 'responsableProfile'])->name('responsable.profile');
     });
 
-    
- 
-   
- 
-
-   
-
    
     // Rôles et permissions
     // Route::get('/users/{id}/roles', [RoleController::class, 'showAssignRoleForm'])->name('roles.showForm');
     // Route::post('/users/{id}/roles', [RoleController::class, 'assignRole'])->name('roles.assign');
     // Route::post('/users/{id}/permissions', [RoleController::class, 'assignPermission'])->name('permissions.assign');
-   
-
-
+  
 
 
 });
 
 require __DIR__ . '/auth.php';
+

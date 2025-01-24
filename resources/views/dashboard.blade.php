@@ -6,12 +6,11 @@
     </x-slot>
 
     <div class="py-12">
-        <div style="text-align: center; margin-top: 100px;">
-            <img src="/images/logo.png" alt="Logo" style="width: 150px; height: 150px;">
-            <h1>Bienvenue</h1>
-            <div>
-                <a href="{{ route('login') }}" class="btn">Se connecter</a>
-                <a href="{{ route('register') }}" class="btn">S'inscrire</a>
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
+                    {{ __("You're logged in!") }}
+                </div>
             </div>
         </div>
     </div>
