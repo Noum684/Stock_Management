@@ -27,6 +27,10 @@ return [
     */
 
     'env' => env('APP_ENV', 'production'),
+    'providers' => [
+    App\Providers\AppServiceProvider::class,
+],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -53,6 +57,11 @@ return [
     */
 
     'url' => env('APP_URL', 'http://localhost'),
+
+    'aliases' => [
+    'File' => Illuminate\Support\Facades\File::class,
+]
+
 
     /*
     |--------------------------------------------------------------------------

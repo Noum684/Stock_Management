@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
@@ -28,7 +29,16 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('welcome', absolute: false));
+        if (Gate::allows('isUser')) {
+            // L'utilisateur est un admin, rediriger vers le dashboard admin
+            return redirect()->route('welcome');
+        }
+        
+        if (Gate::allows('isResponsable')) {
+            // L'utilisateur est un responsable, rediriger vers son dashboard
+            return redirect()->route('dashboards');
+        }
+        
     }
 
     /**
