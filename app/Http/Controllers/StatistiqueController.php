@@ -12,7 +12,7 @@ class StatistiqueController extends Controller
     {
         // Récupérer les commandes groupées par statut
         $commandesParStatut = Commande::select('status', DB::raw('count(*) as total'))
-            ->groupBy('status')
+            ->groupBy('status') 
             ->pluck('total', 'status')
             ->toArray();
 

@@ -16,7 +16,7 @@ class RoleMiddleware
      */
     public function handle(Request $request, Closure $next, $role)
     {
-        $guard = $role === 'admin' ? 'admin' : 'responsable';
+        $guard = $role === 'user' ? 'user' : 'responsable';
 
         if (!Auth::guard($guard)->check()) {
             return redirect()->route('login')->withErrors(['access' => 'Unauthorized access']);

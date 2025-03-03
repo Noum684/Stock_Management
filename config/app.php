@@ -27,10 +27,6 @@ return [
     */
 
     'env' => env('APP_ENV', 'production'),
-    'providers' => [
-    App\Providers\AppServiceProvider::class,
-],
-
 
     /*
     |--------------------------------------------------------------------------
@@ -57,11 +53,6 @@ return [
     */
 
     'url' => env('APP_URL', 'http://localhost'),
-
-    'aliases' => [
-    'File' => Illuminate\Support\Facades\File::class,
-]
-
 
     /*
     |--------------------------------------------------------------------------
@@ -130,6 +121,47 @@ return [
     'maintenance' => [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Service Providers
+    |--------------------------------------------------------------------------
+    |
+    | The service providers listed here will be automatically loaded on the
+    | request to your application. Feel free to add your own services to
+    | this array to grant expanded functionality to your applications.
+    |
+    */
+
+    'providers' => [
+        Illuminate\Database\DatabaseServiceProvider::class,
+        Illuminate\Filesystem\FilesystemServiceProvider::class,
+        Illuminate\Auth\AuthServiceProvider::class,
+        Illuminate\Cache\CacheServiceProvider::class,
+        App\Providers\AppServiceProvider::class,
+        App\Providers\AuthServiceProvider::class,
+        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\EventServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Class Aliases
+    |--------------------------------------------------------------------------
+    |
+    | This array of class aliases will be registered when this application
+    | is started. However, feel free to register as many as you wish as
+    | the aliases are "lazy" loaded, meaning they don't get loaded until
+    | they are actually used.
+    |
+    */
+
+    'aliases' => [
+        'DB' => Illuminate\Support\Facades\DB::class,
+        'File' => Illuminate\Support\Facades\File::class,
+        'Gate'=>Illuminate\Support\Facades\Gate::class,
     ],
 
 ];
