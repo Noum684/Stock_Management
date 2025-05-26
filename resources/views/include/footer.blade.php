@@ -34,53 +34,57 @@
 <script src="/assets/js/demo/chart-pie-demo.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-    const ctx = document.getElementById('commandeChart').getContext('2d');
-    const data = @json($commandeData); // Données envoyées depuis le contrôleur
+@if(isset($commandeData))
+    <script>
+        
+        const ctx = document.getElementById('commandeChart').getContext('2d');
+        const data = @json($commandeData); // Données envoyées depuis le contrôleur
 
-    const chart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: data.labels, // Labels des statuts
-            datasets: [{
-                label: 'Répartition des commandes',
-                data: data.values, // Valeurs des commandes
-                backgroundColor: [
-                    '#FF6384', // Couleur pour 'En attente'
-                    '#36A2EB', // Couleur pour 'Livrée'
-                    '#FFCE56', // Couleur pour 'Refusée'
-                    '#4BC0C0', // Ajoutez d'autres couleurs si nécessaire
-                ],
-                borderColor: '#fff',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    display: true,
-                    position: 'bottom',
-                    labels: {
-                        font: {
-                            size: 14
-                        },
-                        color: '#333'
-                    }
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            let label = context.label || '';
-                            let value = context.raw || 0;
-                            return `${label}: ${value} commandes`;
+        const chart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: data.labels, // Labels des statuts
+                datasets: [{
+                    label: 'Répartition des commandes',
+                    data: data.values, // Valeurs des commandes
+                    backgroundColor: [
+                        '#FF6384', // Couleur pour 'En attente'
+                        '#36A2EB', // Couleur pour 'Livrée'
+                        '#FFCE56', // Couleur pour 'Refusée'
+                        '#4BC0C0', // Ajoutez d'autres couleurs si nécessaire
+                    ],
+                    borderColor: '#fff',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'bottom',
+                        labels: {
+                            font: {
+                                size: 14
+                            },
+                            color: '#333'
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.label || '';
+                                let value = context.raw || 0;
+                                return `${label}: ${value} commandes`;
+                            }
                         }
                     }
                 }
             }
-        }
-    });
-</script>
+        });
+        
+    </script>
+@endif
 
 
     <script>

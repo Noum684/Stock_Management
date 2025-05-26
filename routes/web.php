@@ -16,13 +16,13 @@ use App\Http\Controllers\StatistiqueController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SearchController;
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 
 
-
+ 
 
 Route::middleware(['auth', 'verified'])->group(function () {
 

@@ -14,6 +14,10 @@ class HomeController extends Controller
 {
     public function index()
     {
+        $commandeData = [
+            'labels' => ['En attente', 'Livrée', 'Annulée'],
+            'values' => [10, 15, 5],
+        ];
         $nombreProduits = Produit::count(); // Nombre total de produits
         $totalQuantiteStock = Stock::sum('quantite'); // Quantité totale en stock
         $stocksCritiques = DB::table('stock')->where('quantite', '<=', 10)->get();
@@ -29,7 +33,7 @@ class HomeController extends Controller
 
         $stocks = Stock::with('produit')->get(); // Affichage  des produits avec leur stock
 
-        return view('welcome', compact('nombreProduits', 'totalQuantiteStock', 'produitsAvecStock','stocksCritiques','stocksDisponible','totalCommandes','enAttente','livrees' ,'refusees','nombrePointVente','nombreResponsable','stocks'));
+        return view('welcome', compact('commandeData','nombreProduits', 'totalQuantiteStock', 'produitsAvecStock','stocksCritiques','stocksDisponible','totalCommandes','enAttente','livrees' ,'refusees','nombrePointVente','nombreResponsable','stocks'));
     }
     
 }
